@@ -1,6 +1,7 @@
 package com.STC.StudyCode.Service.ServiceImpl;
 
 import com.STC.StudyCode.Dto.MemberDto;
+import com.STC.StudyCode.Dto.OverviewDto;
 import com.STC.StudyCode.Entity.MemberEntity;
 import com.STC.StudyCode.Repository.MemberRepository;
 import com.STC.StudyCode.Service.MemberService;
@@ -50,6 +51,5 @@ public class MemberServiceImpl implements MemberService {
         }
         else return null;
     }
-
 
 }

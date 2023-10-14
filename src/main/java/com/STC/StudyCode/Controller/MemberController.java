@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
-@RequestMapping("/member")
+@RequestMapping("/api/member")
 public class MemberController {
     MemberService memberService;
 
