@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/member")
@@ -24,9 +25,14 @@ public class MemberController {
     }
 
     /** 회원 정보 입력 */
-    @PostMapping(value = "membership")
+    @PostMapping(value = "/membership")
     public String Membership(@RequestBody MemberDto memberDto) {
         System.out.println(memberDto.getMemId());
         return memberService.Membership(memberDto);
+    }
+
+    @PostMapping(value = "/login")
+    public String Login(@RequestParam String id, String password) {
+        return memberService.Login(id, password);
     }
 }

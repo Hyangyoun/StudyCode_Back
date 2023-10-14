@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -36,6 +37,18 @@ public class MemberServiceImpl implements MemberService {
         MemberEntity memberEntity = memberDto.toEntity();
         memberRepository.save(memberEntity);
         return "성공";
+    }
+
+    @Override
+    public String Login(String id, String password) {
+        Optional<MemberEntity> memberEntity = memberRepository.findById(id);
+        if (memberEntity.isPresent()) {
+            if(memberEntity.get().getPassword().equals(password)) {
+                return memberEntity.get().getNickname();
+            }
+            else return null;
+        }
+        else return null;
     }
 
 
