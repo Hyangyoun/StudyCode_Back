@@ -40,6 +40,7 @@ public class MemberServiceImpl implements MemberService {
         return "성공";
     }
 
+    /** 로그인 요청 */
     @Override
     public String Login(String id, String password) {
         Optional<MemberEntity> memberEntity = memberRepository.findById(id);
