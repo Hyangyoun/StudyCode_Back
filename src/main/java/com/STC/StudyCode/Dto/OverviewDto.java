@@ -10,12 +10,12 @@ import lombok.*;
 @ToString
 public class OverviewDto {
 
-    int blogIndex;
+    String memId;
     String content;
 
     public OverviewEntity toEntity() {
         return OverviewEntity.builder()
-                .blogIndex(blogIndex)
+                .memId(memId)
                 .content(content)
                 .build();
     }

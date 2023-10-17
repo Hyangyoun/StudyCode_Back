@@ -18,6 +18,7 @@ public class BlogCategoryEntity {
     @Id
     @Column(name = "category_name")
     String categoryName;
-    @Column(name = "blog_index")
-    int blogIndex;
+    @Id
+    @Column(name = "mem_id")
+    String memId;
 }

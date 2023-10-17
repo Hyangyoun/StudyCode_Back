@@ -16,7 +16,7 @@ import lombok.*;
 public class OverviewEntity {
 
     @Id
-    @Column(name = "blog_index")
-    int blogIndex;
+    @Column(name = "mem_id")
+    String memId;
     String content;
 }
