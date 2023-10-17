@@ -3,6 +3,7 @@ package com.STC.StudyCode.Service;
 import com.STC.StudyCode.Dto.BlogDto;
 import com.STC.StudyCode.Dto.OverviewDto;
 import com.STC.StudyCode.Dto.PostDto;
+import com.STC.StudyCode.Dto.RepFolderDto;
 
 import java.util.List;
 
@@ -13,4 +14,8 @@ public interface BlogService {
     public BlogDto GetBlogInfo(String memId);
 
     public List<PostDto> PostList(String memId);
+
+    public List<RepFolderDto> GetRepo(String memId);
+
+    public String RegistRepo(RepFolderDto repFolderDto);
 }
