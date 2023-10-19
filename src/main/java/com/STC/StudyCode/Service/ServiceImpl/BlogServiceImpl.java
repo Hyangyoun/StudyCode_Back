@@ -64,6 +64,17 @@ public class BlogServiceImpl implements BlogService {
         return overviewRepository.save(overviewEntity).getMemId();
     }
 
+    /** 소개글 조회 */
+    @Override
+    public OverviewDto GetOverview(String memId) {
+        Optional<OverviewEntity> overviewEntity = overviewRepository.findById(memId);
+
+        if(overviewEntity.isPresent()) {
+            return overviewEntity.get().toDto();
+        }
+        else return null;
+    }
+
     /** 레포지토리 폴더 등록 */
     @Override
     public String RegistRepo(RepFolderDto repFolderDto) {

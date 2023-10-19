@@ -30,6 +30,12 @@ public class BlogController {
         return blogService.RegistOverview(overviewDto);
     }
 
+    /** 블로그 소개글 요청 */
+    @PostMapping(value = "/get/overview")
+    public OverviewDto GetOverview(@RequestParam String memId) {
+        return blogService.GetOverview(memId);
+    }
+
     /** 블로그 포스트 목록 */
     @PostMapping(value = "/get/post/list")
     public List<PostDto> PostList(@RequestParam String memId) {

@@ -20,6 +20,8 @@ public class PostEntity {
     private int postIndex;
     @Column(name = "mem_id")
     private String memId;
+    @Column(name = "category_name")
+    private String categoryName;
     private String title;
     private String content;
     private int like;
@@ -30,6 +32,7 @@ public class PostEntity {
         return PostDto.builder()
                 .postIndex(postIndex)
                 .memId(memId)
+                .categoryName(categoryName)
                 .title(title)
                 .content(content)
                 .like(like)

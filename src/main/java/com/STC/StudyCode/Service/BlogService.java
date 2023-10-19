@@ -8,6 +8,9 @@ public interface BlogService {
     /** 소개글(Overview) 등록 */
     public String RegistOverview(OverviewDto overviewDto);
 
+    /** 소개글(Overview) 조회 */
+    public OverviewDto GetOverview(String memId);
+
     /** 블로그 정보 요청 */
     public BlogDto GetBlogInfo(String memId);
 
