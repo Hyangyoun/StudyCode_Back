@@ -8,8 +8,7 @@ import jakarta.persistence.Table;
 import lombok.*;
 
 @Entity
-@Getter
-@Setter
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,10 +17,10 @@ public class BlogEntity {
 
     @Id
     @Column(name = "mem_id")
-    String memId;
-    String name;
-    int skin;
-    int followers;
+    private String memId;
+    private String name;
+    private int skin;
+    private int followers;
 
     public BlogDto toDto() {
         return BlogDto.builder()

@@ -1,9 +1,6 @@
 package com.STC.StudyCode.Controller;
 
-import com.STC.StudyCode.Dto.BlogDto;
-import com.STC.StudyCode.Dto.OverviewDto;
-import com.STC.StudyCode.Dto.PostDto;
-import com.STC.StudyCode.Dto.RepFolderDto;
+import com.STC.StudyCode.Dto.*;
 import com.STC.StudyCode.Service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +31,7 @@ public class BlogController {
     }
 
     /** 블로그 포스트 목록 */
-    @PostMapping(value = "/post/list")
+    @PostMapping(value = "/get/post/list")
     public List<PostDto> PostList(@RequestParam String memId) {
         return blogService.PostList(memId);
     }
@@ -49,5 +46,17 @@ public class BlogController {
     @PostMapping(value = "/get/repo")
     public List<RepFolderDto> GetRepo(@RequestParam String memId) {
         return blogService.GetRepo(memId);
+    }
+
+    /** 저장소 파일 등록 */
+    @PostMapping(value = "/regist/file")
+    public String RegistFile(@RequestBody RepositoryDto repositoryDto) {
+        return blogService.RegistFile(repositoryDto);
+    }
+
+    /** 저장소 파일목록 요청 */
+    @PostMapping(value = "/get/file")
+    public List<RepositoryDto> GetFile(@RequestParam String memId) {
+        return blogService.GetFile(memId);
     }
 }

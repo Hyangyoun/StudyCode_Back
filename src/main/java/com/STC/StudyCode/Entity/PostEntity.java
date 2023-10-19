@@ -8,8 +8,7 @@ import java.sql.Date;
 
 
 @Entity
-@Getter
-@Setter
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,14 +17,14 @@ public class PostEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_index")
-    int postIndex;
+    private int postIndex;
     @Column(name = "mem_id")
-    String memId;
-    String title;
-    String content;
-    int like;
+    private String memId;
+    private String title;
+    private String content;
+    private int like;
     @Column(name = "post_date")
-    Date postDate;
+    private Date postDate;
 
     public PostDto toDto() {
         return PostDto.builder()

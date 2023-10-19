@@ -11,12 +11,12 @@ import java.sql.Date;
 @ToString
 public class PostDto {
 
-    int postIndex;
-    String memId;
-    String title;
-    String content;
-    int like;
-    Date postDate;
+    private int postIndex;
+    private String memId;
+    private String title;
+    private String content;
+    private int like;
+    private Date postDate;
 
     public PostDto toDto() {
         return PostDto.builder()

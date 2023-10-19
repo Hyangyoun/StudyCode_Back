@@ -9,7 +9,10 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RepFolder implements Serializable {
+public class Repository implements Serializable {
+    private String fileName;
+
     private String folderName;
+
     private String memId;
 }

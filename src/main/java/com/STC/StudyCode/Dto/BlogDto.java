@@ -10,10 +10,10 @@ import lombok.*;
 @ToString
 public class BlogDto {
 
-    String memId;
-    String name;
-    int skin;
-    int followers;
+    private String memId;
+    private String name;
+    private int skin;
+    private int followers;
 
     public BlogEntity toEntity() {
         return BlogEntity.builder()

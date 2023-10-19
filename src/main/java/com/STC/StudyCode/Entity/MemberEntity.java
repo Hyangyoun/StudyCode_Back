@@ -10,8 +10,7 @@ import lombok.*;
 import java.sql.Date;
 
 @Entity
-@Getter
-@Setter
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,15 +19,15 @@ public class MemberEntity {
 
     @Id
     @Column(name = "mem_id")
-    String memId;
-    String password;
-    String nickname;
-    String email;
+    private String memId;
+    private String password;
+    private String nickname;
+    private String email;
     @Column(name = "profile_picture")
-    String profilePicture;
+    private String profilePicture;
     @Column(name = "join_date")
-    Date joinDate;
-    boolean social;
+    private Date joinDate;
+    private boolean social;
 
     public MemberDto toDto() {
         return MemberDto.builder()

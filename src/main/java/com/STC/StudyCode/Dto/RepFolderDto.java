@@ -9,8 +9,8 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 public class RepFolderDto {
-    String folderName;
-    String memId;
+    private String folderName;
+    private String memId;
 
     public RepFolderEntity toEntity() {
         return RepFolderEntity.builder()

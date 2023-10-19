@@ -10,8 +10,8 @@ import lombok.*;
 @ToString
 public class OverviewDto {
 
-    String memId;
-    String content;
+    private String memId;
+    private String content;
 
     public OverviewEntity toEntity() {
         return OverviewEntity.builder()

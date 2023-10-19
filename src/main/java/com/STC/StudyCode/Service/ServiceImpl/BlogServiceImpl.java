@@ -1,17 +1,10 @@
 package com.STC.StudyCode.Service.ServiceImpl;
 
-import com.STC.StudyCode.Dto.BlogDto;
-import com.STC.StudyCode.Dto.OverviewDto;
-import com.STC.StudyCode.Dto.PostDto;
-import com.STC.StudyCode.Dto.RepFolderDto;
-import com.STC.StudyCode.Entity.BlogEntity;
-import com.STC.StudyCode.Entity.OverviewEntity;
-import com.STC.StudyCode.Entity.PostEntity;
-import com.STC.StudyCode.Entity.RepFolderEntity;
-import com.STC.StudyCode.Repository.BlogRepository;
-import com.STC.StudyCode.Repository.OverviewRepository;
-import com.STC.StudyCode.Repository.PostRepository;
-import com.STC.StudyCode.Repository.RepFolderRepository;
+import com.STC.StudyCode.Dto.*;
+import com.STC.StudyCode.Entity.*;
+import com.STC.StudyCode.Entity.Id.RepFolder;
+import com.STC.StudyCode.Entity.Id.Repository;
+import com.STC.StudyCode.Repository.*;
 import com.STC.StudyCode.Service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,12 +21,15 @@ public class BlogServiceImpl implements BlogService {
     PostRepository postRepository;
     RepFolderRepository repFolderRepository;
 
+    RepoRepository repoRepository;
+
     @Autowired
-    public BlogServiceImpl(BlogRepository blogRepository, OverviewRepository overviewRepository, PostRepository postRepository, RepFolderRepository repFolderRepository) {
+    public BlogServiceImpl(BlogRepository blogRepository, OverviewRepository overviewRepository, PostRepository postRepository, RepFolderRepository repFolderRepository, RepoRepository repoRepository) {
         this.blogRepository = blogRepository;
         this.overviewRepository = overviewRepository;
         this.postRepository = postRepository;
         this.repFolderRepository = repFolderRepository;
+        this.repoRepository = repoRepository;
     }
 
     /** 블로그 정보 요청 */
@@ -68,12 +64,18 @@ public class BlogServiceImpl implements BlogService {
         return overviewRepository.save(overviewEntity).getMemId();
     }
 
+    /** 레포지토리 폴더 등록 */
     @Override
     public String RegistRepo(RepFolderDto repFolderDto) {
         RepFolderEntity repFolderEntity = repFolderDto.toEntity();
-        return repFolderRepository.save(repFolderEntity).getFolderName();
+
+        if(repFolderRepository.findById(new RepFolder(repFolderDto.getFolderName(), repFolderDto.getMemId())).isEmpty()) {
+            return repFolderRepository.save(repFolderEntity).getFolderName();
+        }
+        else return "폴더이름이 중복됩니다.";
     }
 
+    /** 레포지토리 파일목록 요청 */
     @Override
     public List<RepFolderDto> GetRepo(String memId) {
         List<RepFolderEntity> repFolderEntities = repFolderRepository.findAllByMemId(memId);
@@ -84,5 +86,29 @@ public class BlogServiceImpl implements BlogService {
         }
 
         return repFolderDtos;
+    }
+
+    /** 레포지토리 파일 등록 */
+    @Override
+    public String RegistFile(RepositoryDto repositoryDto) {
+        RepositoryEntity repositoryEntity = repositoryDto.toEntity();
+
+        if(repoRepository.findById(new Repository(repositoryDto.getFileName(),repositoryDto.getFolderName(),repositoryDto.getMemId())).isEmpty()) {
+            return repoRepository.save(repositoryEntity).getFileName();
+        }
+        else return "해당 폴더에 이미 등록되어있는 파일명입니다.";
+    }
+
+    /** 레포지토리 파일목록 요청 */
+    @Override
+    public List<RepositoryDto> GetFile(String memId) {
+        List<RepositoryEntity> repositoryEntities = repoRepository.findAllByMemId(memId);
+        List<RepositoryDto> repositoryDtos = new ArrayList<>();
+
+        for(RepositoryEntity repositoryEntity : repositoryEntities) {
+            repositoryDtos.add(repositoryEntity.toDto());
+        }
+
+        return repositoryDtos;
     }
 }

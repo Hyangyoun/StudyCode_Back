@@ -1,14 +1,10 @@
 package com.STC.StudyCode.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Getter
-@Setter
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,8 +13,8 @@ public class BlogCategoryEntity {
 
     @Id
     @Column(name = "category_name")
-    String categoryName;
+    private String categoryName;
     @Id
     @Column(name = "mem_id")
-    String memId;
+    private String memId;
 }

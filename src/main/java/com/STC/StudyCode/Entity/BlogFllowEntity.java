@@ -7,8 +7,7 @@ import jakarta.persistence.Table;
 import lombok.*;
 
 @Entity
-@Getter
-@Setter
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,8 +16,8 @@ public class BlogFllowEntity {
 
     @Id
     @Column(name = "blog_index")
-    int blogIndex;
+    private int blogIndex;
     @Id
     @Column(name = "mem_id")
-    String memId;
+    private String memId;
 }

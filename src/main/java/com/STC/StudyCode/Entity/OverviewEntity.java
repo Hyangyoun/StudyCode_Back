@@ -7,8 +7,7 @@ import jakarta.persistence.Table;
 import lombok.*;
 
 @Entity
-@Getter
-@Setter
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,6 +16,6 @@ public class OverviewEntity {
 
     @Id
     @Column(name = "mem_id")
-    String memId;
-    String content;
+    private String memId;
+    private String content;
 }

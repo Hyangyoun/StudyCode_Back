@@ -1,31 +1,24 @@
 package com.STC.StudyCode.Entity;
 
 import com.STC.StudyCode.Dto.RepFolderDto;
-<<<<<<< HEAD
 import com.STC.StudyCode.Entity.Id.RepFolder;
-=======
->>>>>>> main
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Getter
-@Setter
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-<<<<<<< HEAD
 @IdClass(RepFolder.class)
-=======
->>>>>>> main
 @Table(name = "RepFolder")
 public class RepFolderEntity {
     @Id
     @Column(name = "folder_name")
-    String folderName;
+    private String folderName;
     @Id
     @Column(name = "mem_id")
-    String memId;
+    private String memId;
 
     public RepFolderDto toDto() {
         return RepFolderDto.builder()
