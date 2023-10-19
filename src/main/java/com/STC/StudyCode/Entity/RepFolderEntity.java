@@ -1,6 +1,7 @@
 package com.STC.StudyCode.Entity;
 
 import com.STC.StudyCode.Dto.RepFolderDto;
+import com.STC.StudyCode.Entity.Id.RepFolder;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,6 +11,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@IdClass(RepFolder.class)
 @Table(name = "RepFolder")
 public class RepFolderEntity {
     @Id
