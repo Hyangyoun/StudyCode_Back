@@ -42,14 +42,22 @@ public class BlogController {
         return blogService.PostList(memId);
     }
 
+    /** 포스트 정보 요청 */
     @PostMapping(value = "/get/post/info")
     public PostDto PostInfo(@RequestParam int postIndex) {
         return blogService.PostInfo(postIndex);
     }
 
+    /** 포스트 태그 목록 요청 */
     @PostMapping(value = "/get/post/tag")
     public List<PostTagListDto> PostTag(@RequestParam int postIndex) {
         return blogService.PostTagList(postIndex);
+    }
+
+    /** 포스트 파일 목록 요청 */
+    @PostMapping("/get/post/file")
+    public List<PostRepoDto> PostRepo(@RequestParam int postIndex) {
+        return blogService.PostRepoList(postIndex);
     }
 
     /** 저장소 폴더 등록 */

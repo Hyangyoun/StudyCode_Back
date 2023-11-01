@@ -60,6 +60,7 @@ public class BlogServiceImpl implements BlogService {
         else return null;
     }
 
+    /** 포스트 정보 요청 */
     @Override
     public PostDto PostInfo(int postIndex) {
         Optional<PostEntity> postEntity = postRepository.findById(postIndex);
@@ -69,12 +70,23 @@ public class BlogServiceImpl implements BlogService {
         else return null;
     }
 
+    /** 포스트 태그 리스트 요청 */
     @Override
     public List<PostTagListDto> PostTagList(int postIndex) {
         List<PostTagListDto> postTagListDtos = postTagRepository.getTagName(postIndex);
 
         if(postTagListDtos != null) {
             return postTagListDtos;
+        }
+        else return null;
+    }
+
+    @Override
+    public List<PostRepoDto> PostRepoList(int postIndex) {
+        List<PostRepoDto> postRepoDtos = repoRepository.findFile(postIndex);
+
+        if(postRepoDtos != null) {
+            return postRepoDtos;
         }
         else return null;
     }

@@ -23,6 +23,9 @@ public interface BlogService {
     /** 포스트 태그 목록 요청 */
     public List<PostTagListDto> PostTagList(int postIndex);
 
+    /** 포스트 파일 목록 요청 */
+    public List<PostRepoDto> PostRepoList(int postIndex);
+
     /** 레포지토리 폴더 목록 요청 */
     public List<RepFolderDto> GetRepo(String memId);
 
