@@ -38,8 +38,18 @@ public class BlogController {
 
     /** 블로그 포스트 목록 */
     @PostMapping(value = "/get/post/list")
-    public List<PostDto> PostList(@RequestParam String memId) {
+    public List<PostListDto> PostList(@RequestParam String memId) {
         return blogService.PostList(memId);
+    }
+
+    @PostMapping(value = "/get/post/info")
+    public PostDto PostInfo(@RequestParam int postIndex) {
+        return blogService.PostInfo(postIndex);
+    }
+
+    @PostMapping(value = "/get/post/tag")
+    public List<PostTagListDto> PostTag(@RequestParam int postIndex) {
+        return blogService.PostTagList(postIndex);
     }
 
     /** 저장소 폴더 등록 */

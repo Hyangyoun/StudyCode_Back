@@ -20,16 +20,22 @@ public class BlogServiceImpl implements BlogService {
     OverviewRepository overviewRepository;
     PostRepository postRepository;
     RepFolderRepository repFolderRepository;
-
     RepoRepository repoRepository;
+    PostTagRepository postTagRepository;
 
     @Autowired
-    public BlogServiceImpl(BlogRepository blogRepository, OverviewRepository overviewRepository, PostRepository postRepository, RepFolderRepository repFolderRepository, RepoRepository repoRepository) {
+    public BlogServiceImpl(BlogRepository blogRepository,
+                           OverviewRepository overviewRepository,
+                           PostRepository postRepository,
+                           RepFolderRepository repFolderRepository,
+                           RepoRepository repoRepository,
+                           PostTagRepository postTagRepository) {
         this.blogRepository = blogRepository;
         this.overviewRepository = overviewRepository;
         this.postRepository = postRepository;
         this.repFolderRepository = repFolderRepository;
         this.repoRepository = repoRepository;
+        this.postTagRepository = postTagRepository;
     }
 
     /** 블로그 정보 요청 */
@@ -45,15 +51,32 @@ public class BlogServiceImpl implements BlogService {
 
     /** 블로그 포스트 목록 요청 */
     @Override
-    public List<PostDto> PostList(String memId) {
-        List<PostEntity> postEntities = postRepository.findAllByMemId(memId);
-        List<PostDto> postDtos = new ArrayList<>();
+    public List<PostListDto> PostList(String memId) {
+        List<PostListDto> postDtos = postRepository.findPostList(memId);
 
-        for(PostEntity postEntity : postEntities) {
-            postDtos.add(postEntity.toDto());
+        if(postDtos != null) {
+            return postDtos;
         }
+        else return null;
+    }
 
-        return postDtos;
+    @Override
+    public PostDto PostInfo(int postIndex) {
+        Optional<PostEntity> postEntity = postRepository.findById(postIndex);
+        if(postEntity.isPresent()) {
+            return postEntity.get().toDto();
+        }
+        else return null;
+    }
+
+    @Override
+    public List<PostTagListDto> PostTagList(int postIndex) {
+        List<PostTagListDto> postTagListDtos = postTagRepository.getTagName(postIndex);
+
+        if(postTagListDtos != null) {
+            return postTagListDtos;
+        }
+        else return null;
     }
 
     /** 소개글 등록 */
