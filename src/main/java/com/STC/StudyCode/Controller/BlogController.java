@@ -83,4 +83,10 @@ public class BlogController {
     public List<RepositoryDto> GetFile(@RequestParam String memId) {
         return blogService.GetFile(memId);
     }
+
+    /** 댓글 목록 요청 */
+    @PostMapping(value = "/get/post/comment")
+    public List<Object> GetComment(@RequestParam Integer postIndex) {
+        return blogService.GetComment(postIndex);
+    }
 }

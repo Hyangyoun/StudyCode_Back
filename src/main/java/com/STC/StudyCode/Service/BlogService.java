@@ -37,4 +37,7 @@ public interface BlogService {
 
     /** 특정 멤버 레포지토리 파일목록 요청 */
     public List<RepositoryDto> GetFile(String memId);
+
+    /** 포스트 댓글 리스트 요청 */
+    public List<Object> GetComment(Integer postIndex);
 }

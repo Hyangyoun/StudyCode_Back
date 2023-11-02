@@ -22,20 +22,22 @@ public class BlogServiceImpl implements BlogService {
     RepFolderRepository repFolderRepository;
     RepoRepository repoRepository;
     PostTagRepository postTagRepository;
+    PostCommentRepository postCommentRepository;
+    PostReplyRepository postReplyRepository;
 
     @Autowired
-    public BlogServiceImpl(BlogRepository blogRepository,
-                           OverviewRepository overviewRepository,
-                           PostRepository postRepository,
-                           RepFolderRepository repFolderRepository,
-                           RepoRepository repoRepository,
-                           PostTagRepository postTagRepository) {
+    public BlogServiceImpl(BlogRepository blogRepository, OverviewRepository overviewRepository,
+                           PostRepository postRepository, RepFolderRepository repFolderRepository,
+                           RepoRepository repoRepository, PostTagRepository postTagRepository,
+                           PostCommentRepository postCommentRepository, PostReplyRepository postReplyRepository) {
         this.blogRepository = blogRepository;
         this.overviewRepository = overviewRepository;
         this.postRepository = postRepository;
         this.repFolderRepository = repFolderRepository;
         this.repoRepository = repoRepository;
         this.postTagRepository = postTagRepository;
+        this.postCommentRepository = postCommentRepository;
+        this.postReplyRepository = postReplyRepository;
     }
 
     /** 블로그 정보 요청 */
@@ -156,5 +158,28 @@ public class BlogServiceImpl implements BlogService {
         }
 
         return repositoryDtos;
+    }
+
+    /** 포스트 댓글 리스트 요청 */
+    @Override
+    public List<Object> GetComment(Integer postIndex) {
+        List<PostCommentEntity> postCommentEntities = postCommentRepository.findAllByPostIndex(postIndex);
+        List<PostCommentDto> postCommentDtos = new ArrayList<>();
+        List<PostReplyEntity> postReplyEntities = postReplyRepository.findAllByPostIndex(postIndex);
+        List<PostReplyDto> postReplyDtos = new ArrayList<>();
+
+        for(PostCommentEntity postCommentEntity : postCommentEntities) {
+            postCommentDtos.add(postCommentEntity.toDto());
+        }
+
+        for(PostReplyEntity postReplyEntity : postReplyEntities) {
+            postReplyDtos.add(postReplyEntity.toDto());
+        }
+
+        List<Object> commentList = new ArrayList<>();
+        commentList.add(postCommentDtos);
+        commentList.add(postReplyDtos);
+
+        return commentList;
     }
 }
