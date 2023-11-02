@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface PostRepository extends JpaRepository<PostEntity, Integer> {
-    @Query("select p.title as title, p.content as content, p.like as like, p.postDate as date " +
+    @Query("select p.postIndex as postIndex, p.title as title, p.content as content, p.like as like, p.postDate as date " +
             "from PostEntity p where p.memId = :memId")
     List<PostListDto> findPostList(@Param("memId") String memId);
 
