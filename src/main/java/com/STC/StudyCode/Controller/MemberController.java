@@ -5,8 +5,6 @@ import com.STC.StudyCode.Service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/member")
@@ -32,7 +30,7 @@ public class MemberController {
     }
 
     @PostMapping(value = "/login")
-    public String Login(@RequestParam String id, String password) {
-        return memberService.Login(id, password);
+    public String Login(@RequestParam String memId, @RequestParam String password) {
+        return memberService.Login(memId, password);
     }
 }

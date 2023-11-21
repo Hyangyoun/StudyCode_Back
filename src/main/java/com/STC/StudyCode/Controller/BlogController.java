@@ -20,8 +20,8 @@ public class BlogController {
 
     /** 블로그 정보 요청 */
      @PostMapping(value = "/info")
-     public BlogDto BlogInfo(@RequestParam String memId) {
-        return blogService.GetBlogInfo(memId);
+     public BlogDto BlogInfo(@RequestParam String nickName) {
+        return blogService.GetBlogInfo(nickName);
      }
 
      /** 블로그 소개글 등록 */
@@ -44,7 +44,7 @@ public class BlogController {
 
     /** 포스트 정보 요청 */
     @PostMapping(value = "/get/post/info")
-    public PostDto PostInfo(@RequestParam int postIndex) {
+    public PostInfoDto PostInfo(@RequestParam int postIndex) {
         return blogService.PostInfo(postIndex);
     }
 

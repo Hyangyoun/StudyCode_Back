@@ -24,12 +24,14 @@ public class BlogServiceImpl implements BlogService {
     PostTagRepository postTagRepository;
     PostCommentRepository postCommentRepository;
     PostReplyRepository postReplyRepository;
+    MemberRepository memberRepository;
 
     @Autowired
     public BlogServiceImpl(BlogRepository blogRepository, OverviewRepository overviewRepository,
                            PostRepository postRepository, RepFolderRepository repFolderRepository,
                            RepoRepository repoRepository, PostTagRepository postTagRepository,
-                           PostCommentRepository postCommentRepository, PostReplyRepository postReplyRepository) {
+                           PostCommentRepository postCommentRepository, PostReplyRepository postReplyRepository,
+                           MemberRepository memberRepository) {
         this.blogRepository = blogRepository;
         this.overviewRepository = overviewRepository;
         this.postRepository = postRepository;
@@ -38,15 +40,21 @@ public class BlogServiceImpl implements BlogService {
         this.postTagRepository = postTagRepository;
         this.postCommentRepository = postCommentRepository;
         this.postReplyRepository = postReplyRepository;
+        this.memberRepository = memberRepository;
     }
 
     /** 블로그 정보 요청 */
     @Override
-    public BlogDto GetBlogInfo(String memId) {
-        Optional<BlogEntity> blogEntity = blogRepository.findById(memId);
+    public BlogDto GetBlogInfo(String nickName) {
+        String memId = memberRepository.getMemId(nickName);
 
-        if(blogEntity.isPresent()) {
-            return blogEntity.get().toDto();
+        if(memId != null) {
+            Optional<BlogEntity> blogEntity = blogRepository.findById(memId);
+
+            if(blogEntity.isPresent()) {
+                return blogEntity.get().toDto();
+            }
+            else return null;
         }
         else return null;
     }
@@ -64,10 +72,10 @@ public class BlogServiceImpl implements BlogService {
 
     /** 포스트 정보 요청 */
     @Override
-    public PostDto PostInfo(int postIndex) {
-        Optional<PostEntity> postEntity = postRepository.findById(postIndex);
-        if(postEntity.isPresent()) {
-            return postEntity.get().toDto();
+    public PostInfoDto PostInfo(int postIndex) {
+        PostInfoDto postInfoDto = postRepository.findPostInfo(postIndex);
+        if(postInfoDto != null) {
+            return postInfoDto;
         }
         else return null;
     }

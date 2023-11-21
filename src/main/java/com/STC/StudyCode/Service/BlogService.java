@@ -12,10 +12,10 @@ public interface BlogService {
     public OverviewDto GetOverview(String memId);
 
     /** 블로그 정보 요청 */
-    public BlogDto GetBlogInfo(String memId);
+    public BlogDto GetBlogInfo(String nickName);
 
     /** 포스트 정보 요청 */
-    public PostDto PostInfo(int postIndex);
+    public PostInfoDto PostInfo(int postIndex);
 
     /** 특정 멤버 포스트 목록 요청 */
     public List<PostListDto> PostList(String memId);
