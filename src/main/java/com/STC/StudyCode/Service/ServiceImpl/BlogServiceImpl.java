@@ -45,16 +45,11 @@ public class BlogServiceImpl implements BlogService {
 
     /** 블로그 정보 요청 */
     @Override
-    public BlogDto GetBlogInfo(String nickName) {
-        String memId = memberRepository.getMemId(nickName);
+    public BlogInfo GetBlogInfo(String nickName) {
+        BlogInfo blogInfo = blogRepository.findBlogInfo(nickName);
 
-        if(memId != null) {
-            Optional<BlogEntity> blogEntity = blogRepository.findById(memId);
-
-            if(blogEntity.isPresent()) {
-                return blogEntity.get().toDto();
-            }
-            else return null;
+        if(blogInfo != null) {
+            return blogInfo;
         }
         else return null;
     }

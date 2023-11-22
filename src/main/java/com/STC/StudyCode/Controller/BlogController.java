@@ -20,7 +20,7 @@ public class BlogController {
 
     /** 블로그 정보 요청 */
      @PostMapping(value = "/info")
-     public BlogDto BlogInfo(@RequestParam String nickName) {
+     public BlogInfo BlogInfo(@RequestParam String nickName) {
         return blogService.GetBlogInfo(nickName);
      }
 

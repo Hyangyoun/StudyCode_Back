@@ -12,7 +12,7 @@ public interface BlogService {
     public OverviewDto GetOverview(String memId);
 
     /** 블로그 정보 요청 */
-    public BlogDto GetBlogInfo(String nickName);
+    public BlogInfo GetBlogInfo(String nickName);
 
     /** 포스트 정보 요청 */
     public PostInfoDto PostInfo(int postIndex);
