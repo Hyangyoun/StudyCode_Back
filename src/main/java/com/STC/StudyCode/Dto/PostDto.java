@@ -1,5 +1,6 @@
 package com.STC.StudyCode.Dto;
 
+import com.STC.StudyCode.Entity.PostEntity;
 import lombok.*;
 
 import java.sql.Date;
@@ -16,17 +17,16 @@ public class PostDto {
     private String categoryName;
     private String title;
     private String content;
-    private int like;
+    private int recommend;
     private Date postDate;
 
-    public PostDto toDto() {
-        return PostDto.builder()
-                .postIndex(postIndex)
+    public PostEntity toEntity() {
+        return PostEntity.builder()
                 .memId(memId)
                 .categoryName(categoryName)
                 .title(title)
                 .content(content)
-                .like(like)
+                .recommend(recommend)
                 .postDate(postDate)
                 .build();
     }

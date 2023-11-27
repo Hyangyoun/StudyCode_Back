@@ -6,10 +6,7 @@ import java.util.List;
 
 public interface BlogService {
     /** 소개글(Overview) 등록 */
-    public String RegistOverview(OverviewDto overviewDto);
-
-    /** 소개글(Overview) 조회 */
-    public OverviewDto GetOverview(String memId);
+    public String UpdateOverview(String overview, String memId);
 
     /** 블로그 정보 요청 */
     public BlogInfo GetBlogInfo(String nickName);
@@ -18,7 +15,7 @@ public interface BlogService {
     public PostInfoDto PostInfo(int postIndex);
 
     /** 특정 멤버 포스트 목록 요청 */
-    public List<PostListDto> PostList(String memId);
+    public List<PostListDto> PostList(String nickName);
 
     /** 포스트 태그 목록 요청 */
     public List<PostTagListDto> PostTagList(int postIndex);
@@ -40,4 +37,7 @@ public interface BlogService {
 
     /** 포스트 댓글 리스트 요청 */
     public List<Object> GetComment(Integer postIndex);
+
+    /** 포스트 등록 */
+    public Integer RegistPost(PostDto postDto);
 }

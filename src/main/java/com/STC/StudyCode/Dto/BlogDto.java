@@ -14,6 +14,7 @@ public class BlogDto {
     private String name;
     private int skin;
     private int followers;
+    private String overview;
 
     public BlogEntity toEntity() {
         return BlogEntity.builder()
@@ -21,6 +22,7 @@ public class BlogDto {
                 .name(name)
                 .skin(skin)
                 .followers(followers)
+                .overview(overview)
                 .build();
     }
 }

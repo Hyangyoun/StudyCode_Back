@@ -8,6 +8,6 @@ public interface PostInfoDto {
     String getCategoryName();
     String getTitle();
     String getContent();
-    int getLike();
+    Integer getRecommend();
     Date getPostDate();
 }

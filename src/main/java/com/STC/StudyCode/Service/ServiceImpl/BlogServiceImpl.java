@@ -9,6 +9,8 @@ import com.STC.StudyCode.Service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -17,7 +19,6 @@ import java.util.Optional;
 public class BlogServiceImpl implements BlogService {
 
     BlogRepository blogRepository;
-    OverviewRepository overviewRepository;
     PostRepository postRepository;
     RepFolderRepository repFolderRepository;
     RepoRepository repoRepository;
@@ -27,13 +28,11 @@ public class BlogServiceImpl implements BlogService {
     MemberRepository memberRepository;
 
     @Autowired
-    public BlogServiceImpl(BlogRepository blogRepository, OverviewRepository overviewRepository,
-                           PostRepository postRepository, RepFolderRepository repFolderRepository,
-                           RepoRepository repoRepository, PostTagRepository postTagRepository,
-                           PostCommentRepository postCommentRepository, PostReplyRepository postReplyRepository,
-                           MemberRepository memberRepository) {
+    public BlogServiceImpl(BlogRepository blogRepository, PostRepository postRepository,
+                           RepFolderRepository repFolderRepository, RepoRepository repoRepository,
+                           PostTagRepository postTagRepository, PostCommentRepository postCommentRepository,
+                           PostReplyRepository postReplyRepository, MemberRepository memberRepository) {
         this.blogRepository = blogRepository;
-        this.overviewRepository = overviewRepository;
         this.postRepository = postRepository;
         this.repFolderRepository = repFolderRepository;
         this.repoRepository = repoRepository;
@@ -56,8 +55,9 @@ public class BlogServiceImpl implements BlogService {
 
     /** 블로그 포스트 목록 요청 */
     @Override
-    public List<PostListDto> PostList(String memId) {
-        List<PostListDto> postDtos = postRepository.findPostList(memId);
+    public List<PostListDto> PostList(String nickName) {
+        String member = memberRepository.getMemId(nickName);
+        List<PostListDto> postDtos = postRepository.findPostList(member);
 
         if(postDtos != null) {
             return postDtos;
@@ -86,6 +86,15 @@ public class BlogServiceImpl implements BlogService {
         else return null;
     }
 
+    /** 포스트 등록 */
+    @Override
+    public Integer RegistPost(PostDto postDto) {
+        postDto.setPostDate(Date.valueOf(LocalDate.now()));
+        postDto.setRecommend(0);
+        return postRepository.save(postDto.toEntity()).getPostIndex();
+    }
+
+    /** 포스트 파일 요청 */
     @Override
     public List<PostRepoDto> PostRepoList(int postIndex) {
         List<PostRepoDto> postRepoDtos = repoRepository.findFile(postIndex);
@@ -98,21 +107,10 @@ public class BlogServiceImpl implements BlogService {
 
     /** 소개글 등록 */
     @Override
-    public String RegistOverview(OverviewDto overviewDto) {
-        OverviewEntity overviewEntity = overviewDto.toEntity();
+    public String UpdateOverview(String overview, String memId) {
+        blogRepository.registOverview(memId, overview);
 
-        return overviewRepository.save(overviewEntity).getMemId();
-    }
-
-    /** 소개글 조회 */
-    @Override
-    public OverviewDto GetOverview(String memId) {
-        Optional<OverviewEntity> overviewEntity = overviewRepository.findById(memId);
-
-        if(overviewEntity.isPresent()) {
-            return overviewEntity.get().toDto();
-        }
-        else return null;
+        return "done!";
     }
 
     /** 레포지토리 폴더 등록 */

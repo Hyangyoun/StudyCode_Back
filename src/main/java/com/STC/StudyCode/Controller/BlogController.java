@@ -5,6 +5,8 @@ import com.STC.StudyCode.Service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 
 @RestController
@@ -26,20 +28,26 @@ public class BlogController {
 
      /** 블로그 소개글 등록 */
     @PostMapping(value = "/regist/overview")
-    public String RegistOverview(@RequestBody OverviewDto overviewDto) {
-        return blogService.RegistOverview(overviewDto);
+    public String RegistOverview(@RequestParam String overview, @RequestParam String memId) {
+        String url = null;
+        try {
+            url = URLDecoder.decode(overview, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return blogService.UpdateOverview(url, memId);
     }
 
-    /** 블로그 소개글 요청 */
-    @PostMapping(value = "/get/overview")
-    public OverviewDto GetOverview(@RequestParam String memId) {
-        return blogService.GetOverview(memId);
+    /** 포스트 등록 */
+    @PostMapping(value = "/regist/post")
+    public Integer RegistPost(@RequestBody PostDto postDto) {
+        return blogService.RegistPost(postDto);
     }
 
     /** 블로그 포스트 목록 */
     @PostMapping(value = "/get/post/list")
-    public List<PostListDto> PostList(@RequestParam String memId) {
-        return blogService.PostList(memId);
+    public List<PostListDto> PostList(@RequestParam String nickName) {
+        return blogService.PostList(nickName);
     }
 
     /** 포스트 정보 요청 */

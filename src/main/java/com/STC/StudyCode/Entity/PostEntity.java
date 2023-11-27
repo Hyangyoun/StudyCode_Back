@@ -24,7 +24,7 @@ public class PostEntity {
     private String categoryName;
     private String title;
     private String content;
-    private int like;
+    private int recommend;
     @Column(name = "post_date")
     private Date postDate;
 
@@ -35,7 +35,7 @@ public class PostEntity {
                 .categoryName(categoryName)
                 .title(title)
                 .content(content)
-                .like(like)
+                .recommend(recommend)
                 .postDate(postDate)
                 .build();
     }

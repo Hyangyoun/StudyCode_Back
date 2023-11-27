@@ -1,15 +1,12 @@
 package com.STC.StudyCode.Service.ServiceImpl;
 
 import com.STC.StudyCode.Dto.MemberDto;
-import com.STC.StudyCode.Dto.OverviewDto;
 import com.STC.StudyCode.Entity.MemberEntity;
 import com.STC.StudyCode.Repository.MemberRepository;
 import com.STC.StudyCode.Service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
