@@ -1,27 +1,27 @@
-package com.STC.StudyCode.Dto;
+package com.STC.StudyCode.Post.Dto;
 
 import com.STC.StudyCode.Entity.PostEntity;
-import lombok.*;
-
-import java.sql.Date;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@ToString
 public class PostDto {
-
-    private int postIndex;
+    private Integer postIndex;
     private String memId;
     private String categoryName;
     private String title;
     private String content;
-    private int recommend;
-    private Date postDate;
+    private Integer recommend;
+    private String postDate;
 
     public PostEntity toEntity() {
         return PostEntity.builder()
+                .postIndex(postIndex)
                 .memId(memId)
                 .categoryName(categoryName)
                 .title(title)

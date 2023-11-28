@@ -1,32 +1,34 @@
 package com.STC.StudyCode.Entity;
 
-import com.STC.StudyCode.Dto.PostDto;
-import jakarta.persistence.*;
-import lombok.*;
-
-import java.sql.Date;
-
+import com.STC.StudyCode.Post.Dto.PostDto;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Table(name = "Post")
 public class PostEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_index")
-    private int postIndex;
+    private Integer postIndex;
     @Column(name = "mem_id")
     private String memId;
     @Column(name = "category_name")
     private String categoryName;
     private String title;
     private String content;
-    private int recommend;
+    private Integer recommend;
     @Column(name = "post_date")
-    private Date postDate;
+    private String postDate;
 
     public PostDto toDto() {
         return PostDto.builder()

@@ -1,22 +1,22 @@
 package com.STC.StudyCode.Entity;
 
-import com.STC.StudyCode.Dto.MemberDto;
+import com.STC.StudyCode.Member.Dto.MemberDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.*;
-
-import java.sql.Date;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Table(name = "Member")
 public class MemberEntity {
-
     @Id
     @Column(name = "mem_id")
     private String memId;
@@ -26,7 +26,7 @@ public class MemberEntity {
     @Column(name = "profile_picture")
     private String profilePicture;
     @Column(name = "join_date")
-    private Date joinDate;
+    private String joinDate;
     private boolean social;
 
     public MemberDto toDto() {

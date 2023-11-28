@@ -1,19 +1,20 @@
-package com.STC.StudyCode.Dto;
+package com.STC.StudyCode.Blog.Dto;
 
 import com.STC.StudyCode.Entity.BlogEntity;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@Builder
 public class BlogDto {
-
     private String memId;
     private String name;
-    private int skin;
-    private int followers;
+    private Integer skin;
+    private Integer followers;
     private String overview;
 
     public BlogEntity toEntity() {
