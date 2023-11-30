@@ -1,4 +1,4 @@
-package com.STC.StudyCode.Service;
+package com.STC.StudyCode.Member.Service;
 
 import com.STC.StudyCode.Member.Dto.LoginDataDto;
 

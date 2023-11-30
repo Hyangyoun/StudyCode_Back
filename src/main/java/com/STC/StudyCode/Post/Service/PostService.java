@@ -1,4 +1,4 @@
-package com.STC.StudyCode.Service;
+package com.STC.StudyCode.Post.Service;
 
 import com.STC.StudyCode.Entity.PostTagEntity;
 import com.STC.StudyCode.Post.Dto.PostDto;

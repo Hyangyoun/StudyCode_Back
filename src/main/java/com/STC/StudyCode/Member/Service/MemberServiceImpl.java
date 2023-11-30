@@ -1,9 +1,8 @@
-package com.STC.StudyCode.Service.Impl;
+package com.STC.StudyCode.Member.Service;
 
 import com.STC.StudyCode.Member.Dto.LoginDataDto;
 import com.STC.StudyCode.Entity.MemberEntity;
 import com.STC.StudyCode.Repository.MemberRepository;
-import com.STC.StudyCode.Service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

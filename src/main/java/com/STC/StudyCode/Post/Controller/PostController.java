@@ -3,7 +3,7 @@ package com.STC.StudyCode.Post.Controller;
 import com.STC.StudyCode.Post.Dto.PostInfoDto;
 import com.STC.StudyCode.Post.Dto.PostListDto;
 import com.STC.StudyCode.Post.Dto.PostTagDto;
-import com.STC.StudyCode.Service.PostService;
+import com.STC.StudyCode.Post.Service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

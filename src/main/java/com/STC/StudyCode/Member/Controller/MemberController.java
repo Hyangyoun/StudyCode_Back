@@ -1,7 +1,7 @@
 package com.STC.StudyCode.Member.Controller;
 
 import com.STC.StudyCode.Member.Dto.LoginDataDto;
-import com.STC.StudyCode.Service.MemberService;
+import com.STC.StudyCode.Member.Service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

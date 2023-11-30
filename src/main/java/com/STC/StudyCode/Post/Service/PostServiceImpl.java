@@ -1,19 +1,16 @@
-package com.STC.StudyCode.Service.Impl;
+package com.STC.StudyCode.Post.Service;
 
 import com.STC.StudyCode.Entity.PostTagEntity;
-import com.STC.StudyCode.Post.Dto.PostDto;
 import com.STC.StudyCode.Post.Dto.PostInfoDto;
 import com.STC.StudyCode.Post.Dto.PostListDto;
 import com.STC.StudyCode.Post.Dto.PostTagDto;
 import com.STC.StudyCode.Repository.PostRepository;
 import com.STC.StudyCode.Repository.PostTagRepository;
-import com.STC.StudyCode.Service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class PostServiceImpl implements PostService {
