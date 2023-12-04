@@ -31,14 +31,4 @@ public class PostController {
     public List<PostTagDto> PostListTag(@RequestParam String nickname) {
         return postService.PostListTag(nickname);
     }
-
-    @GetMapping("/info")
-    public PostInfoDto PostInfo(@RequestParam Integer postIndex) {
-        return postService.PostInfo(postIndex);
-    }
-
-    @GetMapping("/info/tag")
-    public List<PostTagDto> PostTag(@RequestParam Integer postIndex) {
-        return postService.PostTag(postIndex);
-    }
 }

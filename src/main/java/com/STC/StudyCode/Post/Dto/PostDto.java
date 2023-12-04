@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,6 +20,8 @@ public class PostDto {
     private String content;
     private Integer recommend;
     private String postDate;
+
+    private List<PostTagDto> tag;
 
     public PostEntity toEntity() {
         return PostEntity.builder()

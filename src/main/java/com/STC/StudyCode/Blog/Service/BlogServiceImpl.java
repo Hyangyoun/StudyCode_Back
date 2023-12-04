@@ -38,4 +38,10 @@ public class BlogServiceImpl implements BlogService {
         }
         else return null;
     }
+
+    /** 오버뷰 등록 */
+    @Override
+    public void RegistOverview(String memId, String overView) {
+        blogRepository.UpdateOverview(memId, overView);
+    }
 }

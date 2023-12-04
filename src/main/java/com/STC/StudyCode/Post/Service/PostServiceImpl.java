@@ -1,6 +1,8 @@
 package com.STC.StudyCode.Post.Service;
 
+import com.STC.StudyCode.Entity.PostEntity;
 import com.STC.StudyCode.Entity.PostTagEntity;
+import com.STC.StudyCode.Post.Dto.PostDto;
 import com.STC.StudyCode.Post.Dto.PostInfoDto;
 import com.STC.StudyCode.Post.Dto.PostListDto;
 import com.STC.StudyCode.Post.Dto.PostTagDto;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -64,5 +67,14 @@ public class PostServiceImpl implements PostService {
             }
             return postTagDtos;
         }
+    }
+
+    @Override
+    public PostDto Test(Integer postIndex) {
+        Optional<PostEntity> postEntity = postRepository.findById(postIndex);
+        if(postEntity.isPresent()) {
+            return postEntity.get().toDto();
+        }
+        else return null;
     }
 }

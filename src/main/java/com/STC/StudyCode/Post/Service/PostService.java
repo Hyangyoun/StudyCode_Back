@@ -1,6 +1,5 @@
 package com.STC.StudyCode.Post.Service;
 
-import com.STC.StudyCode.Entity.PostTagEntity;
 import com.STC.StudyCode.Post.Dto.PostDto;
 import com.STC.StudyCode.Post.Dto.PostInfoDto;
 import com.STC.StudyCode.Post.Dto.PostListDto;
@@ -13,4 +12,6 @@ public interface PostService {
     List<PostTagDto> PostListTag(String nickname);
     PostInfoDto PostInfo(Integer postIndex);
     List<PostTagDto> PostTag(Integer postIndex);
+
+    PostDto Test(Integer postIndex);
 }

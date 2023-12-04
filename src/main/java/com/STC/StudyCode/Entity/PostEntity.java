@@ -1,14 +1,14 @@
 package com.STC.StudyCode.Entity;
 
 import com.STC.StudyCode.Post.Dto.PostDto;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.STC.StudyCode.Post.Dto.PostTagDto;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -29,6 +29,9 @@ public class PostEntity {
     private Integer recommend;
     @Column(name = "post_date")
     private String postDate;
+
+    @OneToMany(mappedBy = "postIndex")
+    private List<PostTagEntity> tag;
 
     public PostDto toDto() {
         return PostDto.builder()

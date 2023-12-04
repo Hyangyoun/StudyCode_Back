@@ -27,4 +27,9 @@ public class BlogController {
     public BlogConfigDto BlogConfig(@RequestBody Map<String, String> memIdMap) {
         return blogService.BlogConfig(memIdMap.get("memId"));
     }
+
+    @PostMapping("/regist/overView")
+    public void RegistOverview(@RequestBody Map<String, String> overViewMap) {
+        blogService.RegistOverview(overViewMap.get("memId"), overViewMap.get("overView"));
+    }
 }
