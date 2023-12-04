@@ -14,7 +14,7 @@ public interface PostRepository extends JpaRepository<PostEntity, Integer> {
             "p.postDate as postDate from PostEntity p join MemberEntity m on m.memId = p.memId where m.nickname = :nickname")
     List<PostListDto> GetPostList(@Param("nickname") String nickname);
 
-    @Query("select p.title as title, p.content as content, p.recommend as recommend, p.postDate " +
-            "as postDate from PostEntity p where p.postIndex = :postIndex")
+    @Query("select p.title as title, p.content as content, p.recommend as recommend, p.postDate as postDate, " +
+            "m.nickname as nickname, b.name as blogName from PostEntity p join MemberEntity m on m.memId = p.memId join BlogEntity b on b.memId = p.memId where p.postIndex = :postIndex")
     PostInfoDto GetPostInfo(@Param("postIndex") Integer postIndex);
 }

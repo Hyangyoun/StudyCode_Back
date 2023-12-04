@@ -73,7 +73,7 @@ public class PostServiceImpl implements PostService {
     public PostDto Test(Integer postIndex) {
         Optional<PostEntity> postEntity = postRepository.findById(postIndex);
         if(postEntity.isPresent()) {
-            return postEntity.get().toDto();
+            return null;
         }
         else return null;
     }

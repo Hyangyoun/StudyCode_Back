@@ -14,7 +14,7 @@ public interface BlogRepository extends JpaRepository<BlogEntity, String> {
     @Query("select b from BlogEntity b join MemberEntity m on m.memId = b.memId where m.nickname = :nickname")
     Optional<BlogEntity> GetBlogInfo(@Param("nickname") String nickname);
 
-    @Query("select b.name as name, b.skin as skin from BlogEntity b where b.memId = :memId")
+    @Query("select b.name as name, b.skin as skin, b.overview as overview from BlogEntity b where b.memId = :memId")
     BlogConfigDto GetBlogOption(@Param("memId") String memId);
 
     @Modifying

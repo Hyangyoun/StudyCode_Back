@@ -1,6 +1,8 @@
 package com.STC.StudyCode.Post.Dto;
 
 import com.STC.StudyCode.Entity.PostEntity;
+import com.STC.StudyCode.Entity.PostTagEntity;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,8 +22,6 @@ public class PostDto {
     private String content;
     private Integer recommend;
     private String postDate;
-
-    private List<PostTagDto> tag;
 
     public PostEntity toEntity() {
         return PostEntity.builder()

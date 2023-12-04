@@ -7,5 +7,7 @@ public interface PostInfoDto {
     String getContent();
     Integer getRecommend();
     String getPostDate();
+    String getNickname();
+    String getBlogName();
 
 }

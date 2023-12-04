@@ -30,9 +30,6 @@ public class PostEntity {
     @Column(name = "post_date")
     private String postDate;
 
-    @OneToMany(mappedBy = "postIndex")
-    private List<PostTagEntity> tag;
-
     public PostDto toDto() {
         return PostDto.builder()
                 .postIndex(postIndex)
