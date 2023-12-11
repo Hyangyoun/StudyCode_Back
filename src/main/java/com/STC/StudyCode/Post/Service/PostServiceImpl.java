@@ -11,6 +11,7 @@ import com.STC.StudyCode.Repository.PostTagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -70,11 +71,20 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostDto Test(Integer postIndex) {
-        Optional<PostEntity> postEntity = postRepository.findById(postIndex);
-        if(postEntity.isPresent()) {
-            return null;
+    public Integer RegistPost(PostDto postDto) {
+        postDto.setPostDate(LocalDateTime.now().toString());
+        postDto.setRecommend(0);
+        return postRepository.save(postDto.toEntity()).getPostIndex();
+    }
+
+    @Override
+    public void RegistTag(List<PostTagDto> postTagDtos) {
+        List<PostTagEntity> postTagEntities = new ArrayList<PostTagEntity>();
+
+        for(PostTagDto postTagDto : postTagDtos) {
+            postTagEntities.add(postTagDto.toEntity());
         }
-        else return null;
+
+        postTagRepository.saveAll(postTagEntities);
     }
 }

@@ -9,4 +9,6 @@ public interface BlogService {
     BlogConfigDto BlogConfig(String memId);
 
     void RegistOverview(String memId, String overView);
+
+    void SaveBlogConfig(BlogDto blogDto);
 }

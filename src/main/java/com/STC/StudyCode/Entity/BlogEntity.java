@@ -1,10 +1,7 @@
 package com.STC.StudyCode.Entity;
 
 import com.STC.StudyCode.Blog.Dto.BlogDto;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,6 +16,7 @@ import lombok.NoArgsConstructor;
 public class BlogEntity {
     @Id
     @Column(name = "mem_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String memId;
     private String name;
     private Integer skin;

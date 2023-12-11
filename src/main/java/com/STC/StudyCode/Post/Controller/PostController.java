@@ -1,14 +1,12 @@
 package com.STC.StudyCode.Post.Controller;
 
+import com.STC.StudyCode.Post.Dto.PostDto;
 import com.STC.StudyCode.Post.Dto.PostInfoDto;
 import com.STC.StudyCode.Post.Dto.PostListDto;
 import com.STC.StudyCode.Post.Dto.PostTagDto;
 import com.STC.StudyCode.Post.Service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -40,5 +38,15 @@ public class PostController {
     @GetMapping("/info/tag")
     public List<PostTagDto> PostTag(@RequestParam Integer postIndex) {
         return postService.PostTag(postIndex);
+    }
+
+    @PostMapping("/regist")
+    public Integer RegistPost(@RequestBody PostDto postDto) {
+        return postService.RegistPost(postDto);
+    }
+
+    @PostMapping("/regist/tag")
+    public void RegistTag(@RequestBody List<PostTagDto> postTagDtos) {
+        postService.RegistTag(postTagDtos);
     }
 }

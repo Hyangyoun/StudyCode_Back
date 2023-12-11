@@ -21,4 +21,9 @@ public interface BlogRepository extends JpaRepository<BlogEntity, String> {
     @Transactional
     @Query("update BlogEntity m set m.overview = :overView where m.memId = :memId")
     void UpdateOverview(@Param("memId") String memId, @Param("overView") String overView);
+
+    @Modifying
+    @Transactional
+    @Query("update BlogEntity b set b.name = :name, b.skin = :skin, b.overview = :overview where b.memId = :memId")
+    void UpdateConfig(@Param("memId") String memId, @Param("name") String name, @Param("skin") Integer skin, @Param("overview") String overview);
 }

@@ -44,4 +44,9 @@ public class BlogServiceImpl implements BlogService {
     public void RegistOverview(String memId, String overView) {
         blogRepository.UpdateOverview(memId, overView);
     }
+
+    @Override
+    public void SaveBlogConfig(BlogDto blogDto) {
+        blogRepository.UpdateConfig(blogDto.getMemId(), blogDto.getName(), blogDto.getSkin(), blogDto.getOverview());
+    }
 }

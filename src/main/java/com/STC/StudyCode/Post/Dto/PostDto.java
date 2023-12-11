@@ -2,6 +2,7 @@ package com.STC.StudyCode.Post.Dto;
 
 import com.STC.StudyCode.Entity.PostEntity;
 import com.STC.StudyCode.Entity.PostTagEntity;
+import jakarta.persistence.Column;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,6 +23,8 @@ public class PostDto {
     private String content;
     private Integer recommend;
     private String postDate;
+    private boolean open;
+    private String thumbnailPath;
 
     public PostEntity toEntity() {
         return PostEntity.builder()
@@ -32,6 +35,8 @@ public class PostDto {
                 .content(content)
                 .recommend(recommend)
                 .postDate(postDate)
+                .open(open)
+                .thumbnailPath(thumbnailPath)
                 .build();
     }
 }

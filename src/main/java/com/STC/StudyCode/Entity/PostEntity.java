@@ -19,6 +19,7 @@ import java.util.List;
 public class PostEntity {
     @Id
     @Column(name = "post_index")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer postIndex;
     @Column(name = "mem_id")
     private String memId;
@@ -29,6 +30,9 @@ public class PostEntity {
     private Integer recommend;
     @Column(name = "post_date")
     private String postDate;
+    private boolean open;
+    @Column(name = "thumbnail_path")
+    private String thumbnailPath;
 
     public PostDto toDto() {
         return PostDto.builder()
@@ -39,6 +43,8 @@ public class PostEntity {
                 .content(content)
                 .recommend(recommend)
                 .postDate(postDate)
+                .open(open)
+                .thumbnailPath(thumbnailPath)
                 .build();
     }
 }

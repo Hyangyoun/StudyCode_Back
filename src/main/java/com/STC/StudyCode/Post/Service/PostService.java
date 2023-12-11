@@ -12,6 +12,6 @@ public interface PostService {
     List<PostTagDto> PostListTag(String nickname);
     PostInfoDto PostInfo(Integer postIndex);
     List<PostTagDto> PostTag(Integer postIndex);
-
-    PostDto Test(Integer postIndex);
+    Integer RegistPost(PostDto postDto);
+    void RegistTag(List<PostTagDto> postTagDtos);
 }

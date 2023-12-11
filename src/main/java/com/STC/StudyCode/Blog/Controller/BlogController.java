@@ -32,4 +32,9 @@ public class BlogController {
     public void RegistOverview(@RequestBody Map<String, String> overViewMap) {
         blogService.RegistOverview(overViewMap.get("memId"), overViewMap.get("overView"));
     }
+
+    @PostMapping("/config/update")
+    public void SaveBlogConfig(@RequestBody BlogDto blogDto) {
+        blogService.SaveBlogConfig(blogDto);
+    }
 }
