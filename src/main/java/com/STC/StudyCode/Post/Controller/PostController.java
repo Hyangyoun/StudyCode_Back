@@ -1,5 +1,9 @@
 package com.STC.StudyCode.Post.Controller;
 
+import com.STC.StudyCode.Blog.Dto.CategoryInfoDto;
+import com.STC.StudyCode.Blog.Dto.RepositoryDto;
+import com.STC.StudyCode.Entity.CategoryEntity;
+import com.STC.StudyCode.Member.Dto.MemIdDto;
 import com.STC.StudyCode.Post.Dto.PostDto;
 import com.STC.StudyCode.Post.Dto.PostInfoDto;
 import com.STC.StudyCode.Post.Dto.PostListDto;
@@ -7,6 +11,7 @@ import com.STC.StudyCode.Post.Dto.PostTagDto;
 import com.STC.StudyCode.Post.Service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -48,5 +53,20 @@ public class PostController {
     @PostMapping("/regist/tag")
     public void RegistTag(@RequestBody List<PostTagDto> postTagDtos) {
         postService.RegistTag(postTagDtos);
+    }
+
+    @PostMapping("/regist/file")
+    public void RegistFile(@RequestPart MultipartFile[] multipartFiles) {
+
+    }
+
+    @PostMapping("/repository/folder")
+    public String[] GetFolderList(@RequestBody MemIdDto memIdDto) {
+        return postService.FolderList(memIdDto.getMemId());
+    }
+
+    @GetMapping("/category/test")
+    public List<CategoryInfoDto> CategoryInfo(@RequestParam String nickname) {
+        return postService.CategoryInfo(nickname);
     }
 }

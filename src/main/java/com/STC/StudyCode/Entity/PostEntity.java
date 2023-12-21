@@ -2,6 +2,7 @@ package com.STC.StudyCode.Entity;
 
 import com.STC.StudyCode.Post.Dto.PostDto;
 import com.STC.StudyCode.Post.Dto.PostTagDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

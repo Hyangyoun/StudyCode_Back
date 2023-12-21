@@ -3,6 +3,7 @@ package com.STC.StudyCode.Blog.Controller;
 import com.STC.StudyCode.Blog.Dto.BlogConfigDto;
 import com.STC.StudyCode.Blog.Dto.BlogDto;
 import com.STC.StudyCode.Blog.Service.BlogService;
+import com.STC.StudyCode.Member.Dto.MemIdDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,8 +25,8 @@ public class BlogController {
     }
 
     @PostMapping("/config")
-    public BlogConfigDto BlogConfig(@RequestBody Map<String, String> memIdMap) {
-        return blogService.BlogConfig(memIdMap.get("memId"));
+    public BlogConfigDto BlogConfig(@RequestBody MemIdDto memIdDto) {
+        return blogService.BlogConfig(memIdDto.getMemId());
     }
 
     @PostMapping("/regist/overView")

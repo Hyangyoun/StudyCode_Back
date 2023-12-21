@@ -1,30 +1,38 @@
 package com.STC.StudyCode.Post.Service;
 
+import com.STC.StudyCode.Blog.Dto.CategoryInfoDto;
+import com.STC.StudyCode.Blog.Dto.RepositoryDto;
+import com.STC.StudyCode.Entity.CategoryEntity;
 import com.STC.StudyCode.Entity.PostEntity;
 import com.STC.StudyCode.Entity.PostTagEntity;
 import com.STC.StudyCode.Post.Dto.PostDto;
 import com.STC.StudyCode.Post.Dto.PostInfoDto;
 import com.STC.StudyCode.Post.Dto.PostListDto;
 import com.STC.StudyCode.Post.Dto.PostTagDto;
-import com.STC.StudyCode.Repository.PostRepository;
-import com.STC.StudyCode.Repository.PostTagRepository;
+import com.STC.StudyCode.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class PostServiceImpl implements PostService {
     PostRepository postRepository;
     PostTagRepository postTagRepository;
+    RepFolderRepository repFolderRepository;
+    RepoRepository repoRepository;
+    CategoryRepository categoryRepository;
 
     @Autowired
-    public PostServiceImpl(PostRepository postRepository, PostTagRepository postTagRepository) {
+    public PostServiceImpl(PostRepository postRepository, PostTagRepository postTagRepository,
+                           RepFolderRepository repFolderRepository, RepoRepository repoRepository,
+                           CategoryRepository categoryRepository) {
         this.postRepository = postRepository;
         this.postTagRepository = postTagRepository;
+        this.repFolderRepository = repFolderRepository;
+        this.repoRepository = repoRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     /** 포스트 리스트 요청 */
@@ -86,5 +94,33 @@ public class PostServiceImpl implements PostService {
         }
 
         postTagRepository.saveAll(postTagEntities);
+    }
+
+    @Override
+    public void RegistFile(RepositoryDto repositoryDto) {
+        repoRepository.save(repositoryDto.toEntity());
+    }
+
+    @Override
+    public String[] FolderList(String memId) {
+        return repFolderRepository.GetFolderList(memId);
+    }
+
+    @Override
+    public List<CategoryInfoDto> CategoryInfo(String nickname) {
+        List<CategoryEntity> categoryEntities = categoryRepository.findCategory(nickname);
+        List<CategoryInfoDto> categoryInfoDtos = new ArrayList<CategoryInfoDto>();
+        for (CategoryEntity categoryEntity : categoryEntities) {
+            List<String> thumbnailPath = new ArrayList<String>(categoryEntity.getPost().stream().map(path -> path.getThumbnailPath()).toList());
+            if(thumbnailPath.size() >= 4) {
+                thumbnailPath.subList(4,thumbnailPath.size()).clear();
+                System.out.println(thumbnailPath);
+            }
+            categoryInfoDtos.add(CategoryInfoDto.builder()
+                    .categoryName(categoryEntity.getCategoryName())
+                    .thumbnailPath(thumbnailPath)
+                    .build());
+        }
+        return categoryInfoDtos;
     }
 }

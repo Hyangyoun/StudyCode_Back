@@ -1,14 +1,13 @@
 package com.STC.StudyCode.Entity;
 
 import com.STC.StudyCode.Entity.Id.CategoryId;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -16,6 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @IdClass(CategoryId.class)
+@Table(name = "BlogCategory")
 public class CategoryEntity {
     @Id
     @Column(name = "category_name")
@@ -23,4 +23,11 @@ public class CategoryEntity {
     @Id
     @Column(name = "mem_id")
     private String memId;
+
+    @OneToMany()
+    @JoinColumns({
+            @JoinColumn(name = "category_name"),
+            @JoinColumn(name = "mem_id")
+    })
+    private List<PostEntity> post;
 }
