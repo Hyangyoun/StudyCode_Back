@@ -14,4 +14,5 @@ import java.util.List;
 public class CategoryInfoDto {
     private String categoryName;
     private List<String> thumbnailPath;
+    private Integer postCount;
 }

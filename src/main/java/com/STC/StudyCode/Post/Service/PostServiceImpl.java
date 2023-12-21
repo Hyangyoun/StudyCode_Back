@@ -1,14 +1,12 @@
 package com.STC.StudyCode.Post.Service;
 
+import com.STC.StudyCode.Blog.Dto.CategoryDto;
 import com.STC.StudyCode.Blog.Dto.CategoryInfoDto;
 import com.STC.StudyCode.Blog.Dto.RepositoryDto;
 import com.STC.StudyCode.Entity.CategoryEntity;
 import com.STC.StudyCode.Entity.PostEntity;
 import com.STC.StudyCode.Entity.PostTagEntity;
-import com.STC.StudyCode.Post.Dto.PostDto;
-import com.STC.StudyCode.Post.Dto.PostInfoDto;
-import com.STC.StudyCode.Post.Dto.PostListDto;
-import com.STC.StudyCode.Post.Dto.PostTagDto;
+import com.STC.StudyCode.Post.Dto.*;
 import com.STC.StudyCode.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,44 +36,45 @@ public class PostServiceImpl implements PostService {
     /** 포스트 리스트 요청 */
     @Override
     public List<PostListDto> PostList(String nickname) {
-        return postRepository.GetPostList(nickname);
-    }
+        List<PostEntity> postEntities = postRepository.GetPostList(nickname);
+        List<PostListDto> postListDtos = new ArrayList<PostListDto>();
 
-    @Override
-    public List<PostTagDto> PostListTag(String nickname) {
-        List<PostTagEntity> postTagEntities = postTagRepository.GetPostListTag(nickname);
-
-        if(postTagEntities.isEmpty()) {
-            return null;
-        } else {
-            List<PostTagDto> postTagDtos = new ArrayList<PostTagDto>();
-            for(PostTagEntity postTagEntity : postTagEntities) {
-                postTagDtos.add((postTagEntity.toDto()));
+        if(postEntities != null) {
+            for(PostEntity postEntity : postEntities) {
+                List<String> postTag = new ArrayList<String>(postEntity.getTag().stream().map(tag -> tag.getTagName()).toList());
+                postListDtos.add(PostListDto.builder()
+                        .postIndex(postEntity.getPostIndex())
+                        .title(postEntity.getTitle())
+                        .content(postEntity.getContent())
+                        .recommend(postEntity.getRecommend())
+                        .postDate(postEntity.getPostDate())
+                        .thumbnailPath(postEntity.getThumbnailPath())
+                        .tagName(postTag)
+                        .build());
             }
-            return postTagDtos;
+            return postListDtos;
         }
+        else return null;
     }
 
     /** 포스트 상세정보 요청 */
     @Override
     public PostInfoDto PostInfo(Integer postIndex) {
-        return postRepository.GetPostInfo(postIndex);
-    }
-
-    /** 포스트 태그정보 요청 */
-    @Override
-    public List<PostTagDto> PostTag(Integer postIndex) {
-        List<PostTagEntity> postTagEntities = postTagRepository.findByPostIndex(postIndex);
-
-        if(postTagEntities.isEmpty()) {
-            return null;
-        } else {
-            List<PostTagDto> postTagDtos = new ArrayList<PostTagDto>();
-            for(PostTagEntity postTagEntiy : postTagEntities) {
-                postTagDtos.add(postTagEntiy.toDto());
-            }
-            return postTagDtos;
+        Optional<PostEntity> postEntity = postRepository.GetPostInfo(postIndex);
+        if(postEntity.isPresent()) {
+            List<String> postTag = new ArrayList<>(postEntity.get().getTag().stream().map(tag -> tag.getTagName()).toList());
+            PostUserDto postUserDto = postRepository.GetPostUser(postIndex);
+            return PostInfoDto.builder()
+                    .title(postEntity.get().getTitle())
+                    .content(postEntity.get().getContent())
+                    .recommend(postEntity.get().getRecommend())
+                    .postDate(postEntity.get().getPostDate())
+                    .nickname(postUserDto.getNickname())
+                    .blogName(postUserDto.getBlogName())
+                    .tagName(postTag)
+                    .build();
         }
+        else return null;
     }
 
     @Override
@@ -110,17 +109,18 @@ public class PostServiceImpl implements PostService {
     public List<CategoryInfoDto> CategoryInfo(String nickname) {
         List<CategoryEntity> categoryEntities = categoryRepository.findCategory(nickname);
         List<CategoryInfoDto> categoryInfoDtos = new ArrayList<CategoryInfoDto>();
-        for (CategoryEntity categoryEntity : categoryEntities) {
-            List<String> thumbnailPath = new ArrayList<String>(categoryEntity.getPost().stream().map(path -> path.getThumbnailPath()).toList());
-            if(thumbnailPath.size() >= 4) {
-                thumbnailPath.subList(4,thumbnailPath.size()).clear();
-                System.out.println(thumbnailPath);
+        if(categoryEntities != null) {
+            for (CategoryEntity categoryEntity : categoryEntities) {
+                List<ThumbnailPathDto> thumbnailPathDtos = postRepository.GetCategory(categoryEntity.getCategoryName(), nickname);
+                List<String> thumbnailPath = new ArrayList<String>(thumbnailPathDtos.stream().map(path -> path.getThumbnailPath()).toList());
+                categoryInfoDtos.add(CategoryInfoDto.builder()
+                        .categoryName(categoryEntity.getCategoryName())
+                        .thumbnailPath(thumbnailPath)
+                        .postCount(postRepository.GetCategorytoCount(categoryEntity.getCategoryName(), nickname))
+                        .build());
             }
-            categoryInfoDtos.add(CategoryInfoDto.builder()
-                    .categoryName(categoryEntity.getCategoryName())
-                    .thumbnailPath(thumbnailPath)
-                    .build());
+            return categoryInfoDtos;
         }
-        return categoryInfoDtos;
+        else return null;
     }
 }

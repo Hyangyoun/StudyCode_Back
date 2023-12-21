@@ -23,11 +23,4 @@ public class CategoryEntity {
     @Id
     @Column(name = "mem_id")
     private String memId;
-
-    @OneToMany()
-    @JoinColumns({
-            @JoinColumn(name = "category_name"),
-            @JoinColumn(name = "mem_id")
-    })
-    private List<PostEntity> post;
 }

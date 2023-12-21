@@ -14,9 +14,7 @@ import java.util.List;
 
 public interface PostService {
     List<PostListDto> PostList(String nickname);
-    List<PostTagDto> PostListTag(String nickname);
     PostInfoDto PostInfo(Integer postIndex);
-    List<PostTagDto> PostTag(Integer postIndex);
     Integer RegistPost(PostDto postDto);
     void RegistTag(List<PostTagDto> postTagDtos);
     String[] FolderList(String memId);

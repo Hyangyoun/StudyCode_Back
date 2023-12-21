@@ -35,6 +35,10 @@ public class PostEntity {
     @Column(name = "thumbnail_path")
     private String thumbnailPath;
 
+    @OneToMany
+    @JoinColumn(name = "post_index")
+    private List<PostTagEntity> tag;
+
     public PostDto toDto() {
         return PostDto.builder()
                 .postIndex(postIndex)
