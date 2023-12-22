@@ -99,28 +99,4 @@ public class PostServiceImpl implements PostService {
     public void RegistFile(RepositoryDto repositoryDto) {
         repoRepository.save(repositoryDto.toEntity());
     }
-
-    @Override
-    public String[] FolderList(String memId) {
-        return repFolderRepository.GetFolderList(memId);
-    }
-
-    @Override
-    public List<CategoryInfoDto> CategoryInfo(String nickname) {
-        List<CategoryEntity> categoryEntities = categoryRepository.findCategory(nickname);
-        List<CategoryInfoDto> categoryInfoDtos = new ArrayList<CategoryInfoDto>();
-        if(categoryEntities != null) {
-            for (CategoryEntity categoryEntity : categoryEntities) {
-                List<ThumbnailPathDto> thumbnailPathDtos = postRepository.GetCategory(categoryEntity.getCategoryName(), nickname);
-                List<String> thumbnailPath = new ArrayList<String>(thumbnailPathDtos.stream().map(path -> path.getThumbnailPath()).toList());
-                categoryInfoDtos.add(CategoryInfoDto.builder()
-                        .categoryName(categoryEntity.getCategoryName())
-                        .thumbnailPath(thumbnailPath)
-                        .postCount(postRepository.GetCategorytoCount(categoryEntity.getCategoryName(), nickname))
-                        .build());
-            }
-            return categoryInfoDtos;
-        }
-        else return null;
-    }
 }

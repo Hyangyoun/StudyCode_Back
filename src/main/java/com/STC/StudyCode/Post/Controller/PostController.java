@@ -60,18 +60,4 @@ public class PostController {
     public void RegistFile(@RequestPart MultipartFile[] multipartFiles) {
 
     }
-
-    /** 레포지토리 폴더 목록 요청 */
-    @Operation(summary = "레포지토리 폴더 목록 요청", description = "레포지토리에 등록되있는 폴더 목록을 요청합니다.")
-    @PostMapping("/repository/folder")
-    public String[] GetFolderList(@RequestBody MemIdDto memIdDto) {
-        return postService.FolderList(memIdDto.getMemId());
-    }
-
-    /** 카테고리 정보 목록 요청 */
-    @Operation(summary = "카테고리 정보 요청", description = "블로그 소유자(nickname)이 등록한 카테고리의 정보를 호출합니다.")
-    @GetMapping("/category/info")
-    public List<CategoryInfoDto> CategoryInfo(@RequestParam String nickname) {
-        return postService.CategoryInfo(nickname);
-    }
 }

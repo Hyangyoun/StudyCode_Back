@@ -17,7 +17,5 @@ public interface PostService {
     PostInfoDto PostInfo(Integer postIndex);
     Integer RegistPost(PostDto postDto);
     void RegistTag(List<PostTagDto> postTagDtos);
-    String[] FolderList(String memId);
     void RegistFile(RepositoryDto repositoryDto);
-    List<CategoryInfoDto> CategoryInfo(String nickname);
 }
