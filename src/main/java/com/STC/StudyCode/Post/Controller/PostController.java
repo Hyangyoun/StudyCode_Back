@@ -1,13 +1,6 @@
 package com.STC.StudyCode.Post.Controller;
 
-import com.STC.StudyCode.Blog.Dto.CategoryInfoDto;
-import com.STC.StudyCode.Blog.Dto.RepositoryDto;
-import com.STC.StudyCode.Entity.CategoryEntity;
-import com.STC.StudyCode.Member.Dto.MemIdDto;
-import com.STC.StudyCode.Post.Dto.PostDto;
-import com.STC.StudyCode.Post.Dto.PostInfoDto;
-import com.STC.StudyCode.Post.Dto.PostListDto;
-import com.STC.StudyCode.Post.Dto.PostTagDto;
+import com.STC.StudyCode.Post.Dto.*;
 import com.STC.StudyCode.Post.Service.PostService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,9 +48,30 @@ public class PostController {
     }
 
     /** 포스트 파일 등록 */
-    @Operation(summary = "포스트 파일 등록", description = "작성한 포스트의 파일을 등록합니다.")
+    @Operation(summary = "포스트 파일 등록(미완)", description = "작성한 포스트의 파일을 등록합니다.")
     @PostMapping("/regist/file")
     public void RegistFile(@RequestPart MultipartFile[] multipartFiles) {
 
+    }
+
+    /** 포스트 댓글 요청 */
+    @Operation(summary = "포스트 댓글정보 요청", description = "postIndex에 해당하는 포스트의 댓글목록을 요청합니다.")
+    @GetMapping("/comment")
+    public List<CommentDto> getComment(@RequestParam Integer postIndex) {
+        return postService.getComment(postIndex);
+    }
+
+    /** 포스트 댓글 등록 */
+    @Operation(summary = "포스트 댓글 등록", description = "댓글을 등록합니다.")
+    @GetMapping("/regist/comment")
+    public void RegistComment(@RequestParam PostCommentDto postCommentDto) {
+        postService.RegistComment(postCommentDto);
+    }
+
+    /** 포스트 대댓글 등록 */
+    @Operation(summary = "포스트 대댓글 등록", description = "대댓글을 등록합니다.")
+    @GetMapping("/regist/reply")
+    public void RegistReply(@RequestParam PostReplyDto postReplyDto) {
+        postService.RegistReply(postReplyDto);
     }
 }

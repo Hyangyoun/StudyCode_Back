@@ -1,9 +1,6 @@
 package com.STC.StudyCode.Post.Service;
 
-import com.STC.StudyCode.Blog.Dto.CategoryDto;
-import com.STC.StudyCode.Blog.Dto.CategoryInfoDto;
 import com.STC.StudyCode.Blog.Dto.RepositoryDto;
-import com.STC.StudyCode.Entity.CategoryEntity;
 import com.STC.StudyCode.Entity.PostEntity;
 import com.STC.StudyCode.Entity.PostTagEntity;
 import com.STC.StudyCode.Post.Dto.*;
@@ -21,16 +18,21 @@ public class PostServiceImpl implements PostService {
     RepFolderRepository repFolderRepository;
     RepoRepository repoRepository;
     CategoryRepository categoryRepository;
+    PostCommentRepository postCommentRepository;
+    PostReplyRepository postReplyRepository;
 
     @Autowired
     public PostServiceImpl(PostRepository postRepository, PostTagRepository postTagRepository,
                            RepFolderRepository repFolderRepository, RepoRepository repoRepository,
-                           CategoryRepository categoryRepository) {
+                           CategoryRepository categoryRepository, PostCommentRepository postCommentRepository,
+                           PostReplyRepository postReplyRepository) {
         this.postRepository = postRepository;
         this.postTagRepository = postTagRepository;
         this.repFolderRepository = repFolderRepository;
         this.repoRepository = repoRepository;
         this.categoryRepository = categoryRepository;
+        this.postCommentRepository = postCommentRepository;
+        this.postReplyRepository = postReplyRepository;
     }
 
     /** 포스트 리스트 요청 */
@@ -98,5 +100,41 @@ public class PostServiceImpl implements PostService {
     @Override
     public void RegistFile(RepositoryDto repositoryDto) {
         repoRepository.save(repositoryDto.toEntity());
+    }
+
+    /** 댓글 정보 요청 */
+    @Override
+    public List<CommentDto> getComment(Integer postIndex) {
+        List<CommentInfoDto> commentInfoDtos = postCommentRepository.findComment(postIndex);
+        List<CommentDto> commentDtos = new ArrayList<CommentDto>();
+
+        if(commentInfoDtos != null) {
+            for(CommentInfoDto commentInfoDto : commentInfoDtos) {
+                List<ReplyInfoDto> reply = postReplyRepository.findReply(commentInfoDto.getCommentIndex());
+                commentDtos.add(CommentDto.builder()
+                        .commentIndex(commentInfoDto.getCommentIndex())
+                        .nickname(commentInfoDto.getNickname())
+                        .content(commentInfoDto.getContent())
+                        .commentDate(commentInfoDto.getCommentDate())
+                        .reply(reply)
+                        .build());
+            }
+            return commentDtos;
+        }
+        else return null;
+    }
+
+    /** 댓글 등록 */
+    @Override
+    public void RegistComment(PostCommentDto postCommentDto) {
+        postCommentDto.setCommentDate(LocalDateTime.now().toString());
+        postCommentRepository.save(postCommentDto.toEntity());
+    }
+
+    /** 대댓글 등록 */
+    @Override
+    public void RegistReply(PostReplyDto postReplyDto) {
+        postReplyDto.setCommentDate(LocalDateTime.now().toString());
+        postReplyRepository.save(postReplyDto.toEntity());
     }
 }
