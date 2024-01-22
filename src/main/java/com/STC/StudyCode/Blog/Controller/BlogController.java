@@ -1,9 +1,6 @@
 package com.STC.StudyCode.Blog.Controller;
 
-import com.STC.StudyCode.Blog.Dto.BlogConfigDto;
-import com.STC.StudyCode.Blog.Dto.BlogDto;
-import com.STC.StudyCode.Blog.Dto.CategoryInfoDto;
-import com.STC.StudyCode.Blog.Dto.RepositoryFileInfoDto;
+import com.STC.StudyCode.Blog.Dto.*;
 import com.STC.StudyCode.Blog.Service.BlogService;
 import com.STC.StudyCode.Member.Dto.MemIdDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -54,6 +51,12 @@ public class BlogController {
         return blogService.FolderList(nickname);
     }
 
+    @PostMapping("/repository/folder/create")
+    @Operation(summary = "레포지토리 폴더 생성", description = "레포지토리에 폴더를 생성합니다.")
+    public void AddFolder(@RequestBody RepFolderDto repFolderDto) {
+        blogService.AddFolder(repFolderDto);
+    }
+
     /** 레포지토리 파일 목록 요청 */
     @GetMapping("/repository/file")
     @Operation(summary = "레포지토리 파일 목록 요청", description = "블로그 소유자(nickname)의 폴더(folderName)에 해당하는 파일 목록을 요청합니다.")
@@ -66,5 +69,12 @@ public class BlogController {
     @GetMapping("/category/info")
     public List<CategoryInfoDto> CategoryInfo(@RequestParam String nickname) {
         return blogService.CategoryInfo(nickname);
+    }
+
+    /** 카테고리 추가 */
+    @Operation(summary = "카테고리 추가", description = "소유자(memId)의 블로그에 categoryName의 카테고리를 추가합니다.")
+    @PostMapping("/category/create")
+    public void AddCategory(@RequestBody CategoryDto categoryDto) {
+        blogService.AddCategory(categoryDto);
     }
 }

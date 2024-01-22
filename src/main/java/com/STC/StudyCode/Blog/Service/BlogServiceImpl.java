@@ -1,9 +1,6 @@
 package com.STC.StudyCode.Blog.Service;
 
-import com.STC.StudyCode.Blog.Dto.BlogConfigDto;
-import com.STC.StudyCode.Blog.Dto.BlogDto;
-import com.STC.StudyCode.Blog.Dto.CategoryInfoDto;
-import com.STC.StudyCode.Blog.Dto.RepositoryFileInfoDto;
+import com.STC.StudyCode.Blog.Dto.*;
 import com.STC.StudyCode.Entity.BlogEntity;
 import com.STC.StudyCode.Entity.CategoryEntity;
 import com.STC.StudyCode.Post.Dto.ThumbnailPathDto;
@@ -63,9 +60,16 @@ public class BlogServiceImpl implements BlogService {
         blogRepository.UpdateOverview(memId, overView);
     }
 
+    /** 블로그 설정 저장 */
     @Override
     public void SaveBlogConfig(BlogDto blogDto) {
-        blogRepository.UpdateConfig(blogDto.getMemId(), blogDto.getName(), blogDto.getSkin(), blogDto.getOverview());
+        if(blogDto.getOverview() == "") {
+            blogDto.setFollowers(0);
+            blogRepository.save(blogDto.toEntity());
+        }
+        else {
+            blogRepository.UpdateConfig(blogDto.getMemId(), blogDto.getName(), blogDto.getSkin(), blogDto.getOverview());
+        }
     }
 
     /** 레포지토리 폴더 목록 요청 */
@@ -74,12 +78,19 @@ public class BlogServiceImpl implements BlogService {
         return repFolderRepository.GetFolderList(nickname);
     }
 
+    /** 레포지토리 폴더 생성 */
+    @Override
+    public void AddFolder(RepFolderDto repFolderDto) {
+        repFolderRepository.save(repFolderDto.toEntity());
+    }
+
     /** 레포지토리 파일 목록 요청 */
     @Override
     public List<RepositoryFileInfoDto> FileList(String nickname, String folderName) {
         return repoRepository.GetFile(nickname, folderName);
     }
 
+    /** 카테고리 목록 정보 요청 */
     @Override
     public List<CategoryInfoDto> CategoryInfo(String nickname) {
         List<CategoryEntity> categoryEntities = categoryRepository.findCategory(nickname);
@@ -97,5 +108,10 @@ public class BlogServiceImpl implements BlogService {
             return categoryInfoDtos;
         }
         else return null;
+    }
+
+    @Override
+    public void AddCategory(CategoryDto categoryDto) {
+        categoryRepository.save(categoryDto.toEntity());
     }
 }

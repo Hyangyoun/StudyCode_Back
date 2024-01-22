@@ -1,9 +1,6 @@
 package com.STC.StudyCode.Blog.Service;
 
-import com.STC.StudyCode.Blog.Dto.BlogConfigDto;
-import com.STC.StudyCode.Blog.Dto.BlogDto;
-import com.STC.StudyCode.Blog.Dto.CategoryInfoDto;
-import com.STC.StudyCode.Blog.Dto.RepositoryFileInfoDto;
+import com.STC.StudyCode.Blog.Dto.*;
 
 import java.util.List;
 
@@ -18,8 +15,12 @@ public interface BlogService {
     void SaveBlogConfig(BlogDto blogDto);
     /** 레포지토리 폴더 목록 */
     List<String> FolderList(String nickname);
+    /** 레포지토리 폴더 추가 */
+    void AddFolder(RepFolderDto repFolderDto);
     /** 레포지토리 파일 목록 */
     List<RepositoryFileInfoDto> FileList(String nickname, String folderName);
     /** 카테고리 정보 */
     List<CategoryInfoDto> CategoryInfo(String nickname);
+    /** 카테고리 추가 */
+    void AddCategory(CategoryDto categoryDto);
 }

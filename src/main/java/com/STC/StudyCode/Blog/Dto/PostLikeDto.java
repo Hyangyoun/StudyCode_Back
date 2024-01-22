@@ -1,6 +1,6 @@
 package com.STC.StudyCode.Blog.Dto;
 
-import com.STC.StudyCode.Entity.RepFolderEntity;
+import com.STC.StudyCode.Entity.PostLikeEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,14 +10,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class RepFolderDto {
-    private String folderName;
+public class PostLikeDto {
     private String memId;
+    private Integer postIndex;
 
-    public RepFolderEntity toEntity() {
-        return RepFolderEntity.builder()
-                .folderName(folderName)
+    public PostLikeEntity toEntity() {
+        return PostLikeEntity.builder()
                 .memId(memId)
+                .postIndex(postIndex)
                 .build();
     }
 }

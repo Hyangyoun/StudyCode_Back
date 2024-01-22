@@ -16,7 +16,6 @@ import lombok.NoArgsConstructor;
 public class BlogEntity {
     @Id
     @Column(name = "mem_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String memId;
     private String name;
     private Integer skin;

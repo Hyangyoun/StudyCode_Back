@@ -8,6 +8,7 @@ import java.util.List;
 @Data
 @Builder
 public class PostInfoDto {
+    private Integer postIndex;
     private String title;
     private String content;
     private Integer recommend;
