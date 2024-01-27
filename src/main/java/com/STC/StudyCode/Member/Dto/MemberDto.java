@@ -17,7 +17,7 @@ public class MemberDto {
     private String email;
     private String profilePicture;
     private String joinDate;
-    private boolean social;
+    private String social;
 
     public MemberEntity toEntity() {
         return MemberEntity.builder()

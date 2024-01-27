@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RepFolderId implements Serializable {
-    private String folderName;
+public class PostListId implements Serializable {
     private String memId;
+    private Integer postIndex;
 }

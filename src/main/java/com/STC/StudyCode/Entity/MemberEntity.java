@@ -1,6 +1,5 @@
 package com.STC.StudyCode.Entity;
 
-import com.STC.StudyCode.Member.Dto.MemberDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -27,17 +26,5 @@ public class MemberEntity {
     private String profilePicture;
     @Column(name = "join_date")
     private String joinDate;
-    private boolean social;
-
-    public MemberDto toDto() {
-        return MemberDto.builder()
-                .memId(memId)
-                .password(password)
-                .nickname(nickname)
-                .email(email)
-                .profilePicture(profilePicture)
-                .joinDate(joinDate)
-                .social(social)
-                .build();
-    }
+    private String social;
 }

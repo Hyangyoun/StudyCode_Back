@@ -1,15 +1,15 @@
 package com.STC.StudyCode.Post.Controller;
 
-import com.STC.StudyCode.Blog.Dto.PostLikeDto;
-import com.STC.StudyCode.Post.Dto.*;
+import com.STC.StudyCode.Entity.PostEntity;
+import com.STC.StudyCode.Post.Dto.PostToTagDto;
 import com.STC.StudyCode.Post.Service.PostService;
-import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/api/post")
@@ -21,83 +21,13 @@ public class PostController {
         this.postService = postService;
     }
 
-    /** 포스트 리스트 정보 요청 */
-    @Operation(summary = "포스트 리스트 정보 요청", description = "블로그 소유자(nickname)이 등록한 포스트의 리스트를 호출합니다, categoryName을 포함할 경우 카테고리에 해당하는 포스트만 조회합니다.")
-    @GetMapping("/list")
-    public List<PostListDto> PostList(@RequestParam String nickname, @RequestParam(required = false) String categoryName) {
-        if(categoryName != null) {
-            return postService.PostList(nickname, categoryName);
-        }
-        else return postService.PostList(nickname);
-    }
-
-    /** 태그별 포스트 리스트 정보 요청 */
-    @Operation(summary = "태그별 포스트 리스트 정보 요청", description = "블로그 소유자(nickname)이 등록한 포스트들 중 tagName에 해당하는 포스트의 리스트를 호출합니다.")
-    @GetMapping("/tag/list")
-    public List<PostListDto> PostTagList(@RequestParam String nickname, @RequestParam String tagName) {
-        return postService.PostTagList(nickname, tagName);
-    }
-
-    /** 포스트 상세 정보 요청 */
-    @Operation(summary = "포스트 상세 정보 요청", description = "포스트Index에 해당하는 포스트의 정보를 호출합니다.")
     @GetMapping("/info")
-    public PostInfoDto PostInfo(@RequestParam Integer postIndex) {
+    public List<PostToTagDto> PostInfo(@RequestParam Integer postIndex) {
         return postService.PostInfo(postIndex);
     }
 
-    /** 태그 목록 요청 */
-    @Operation(summary = "태그 목록 요청", description = "nickname이 포스트한 글의 태그 목록을 조회합니다.")
-    @GetMapping("/tag")
-    public Set<Object> TagList(@RequestParam String nickname) {
-        return postService.TagList(nickname);
-    }
-
-    /** 포스트 등록 */
-    @Operation(summary = "포스트 등록", description = "작성한 포스트를 등록합니다.")
-    @PostMapping("/regist")
-    public Integer RegistPost(@RequestBody PostDto postDto) {
-        return postService.RegistPost(postDto);
-    }
-
-    /** 포스트 태그 등록 */
-    @Operation(summary = "포스트 태그 등록", description = "작성한 포스트의 태그를 등록합니다.")
-    @PostMapping("/regist/tag")
-    public void RegistTag(@RequestBody List<PostTagDto> postTagDtos) {
-        postService.RegistTag(postTagDtos);
-    }
-
-    /** 포스트 파일 등록 */
-    @Operation(summary = "포스트 파일 등록(미완)", description = "작성한 포스트의 파일을 등록합니다.")
-    @PostMapping("/regist/file")
-    public void RegistFile(@RequestPart MultipartFile[] multipartFiles) {
-
-    }
-
-    /** 포스트 댓글 요청 */
-    @Operation(summary = "포스트 댓글정보 요청", description = "postIndex에 해당하는 포스트의 댓글목록을 요청합니다.")
-    @GetMapping("/comment")
-    public List<CommentDto> getComment(@RequestParam Integer postIndex) {
-        return postService.getComment(postIndex);
-    }
-
-    /** 포스트 댓글 등록 */
-    @Operation(summary = "포스트 댓글 등록", description = "댓글을 등록합니다.")
-    @GetMapping("/regist/comment")
-    public void RegistComment(@RequestParam PostCommentDto postCommentDto) {
-        postService.RegistComment(postCommentDto);
-    }
-
-    /** 포스트 대댓글 등록 */
-    @Operation(summary = "포스트 대댓글 등록", description = "대댓글을 등록합니다.")
-    @GetMapping("/regist/reply")
-    public void RegistReply(@RequestParam PostReplyDto postReplyDto) {
-        postService.RegistReply(postReplyDto);
-    }
-
-    /** 포스트 좋아요 처리 */
-    @Operation(summary = "포스트 좋아요 처리", description = "postIndex에 해당하는 포스트의 좋아요를 내리거나 올립니다.")
-    @PostMapping("/like")
-    public void PostLike(@RequestBody PostLikeDto postLikeDto) {
-        postService.LikePost(postLikeDto);
+    @GetMapping("/test")
+    public PostEntity test(@RequestParam Long index) {
+        return postService.test(index);
     }
 }

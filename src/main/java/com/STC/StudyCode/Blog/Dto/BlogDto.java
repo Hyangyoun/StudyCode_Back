@@ -11,18 +11,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class BlogDto {
+    private Integer blogIndex;
     private String memId;
     private String name;
     private Integer skin;
-    private Integer followers;
     private String overview;
 
     public BlogEntity toEntity() {
         return BlogEntity.builder()
+                .blogIndex(blogIndex)
                 .memId(memId)
                 .name(name)
                 .skin(skin)
-                .followers(followers)
                 .overview(overview)
                 .build();
     }

@@ -1,6 +1,6 @@
 package com.STC.StudyCode.Entity;
 
-import com.STC.StudyCode.Entity.Id.PostLikeId;
+import com.STC.StudyCode.Entity.Id.PostListId;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@IdClass(PostLikeId.class)
+@IdClass(PostListId.class)
 @Table(name = "PostLike")
-public class PostLikeEntity {
+public class PostLike {
     @Id
     @Column(name = "mem_id")
     private String memId;

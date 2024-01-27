@@ -6,8 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Entity
 @Data
 @AllArgsConstructor
@@ -26,8 +24,6 @@ public class PostCommentEntity {
     private String content;
     @Column(name = "comment_date")
     private String commentDate;
-
-    @OneToMany
-    @JoinColumn(name = "comment_index")
-    private List<PostReplyEntity> reply;
+    @Column(name = "parent_index")
+    private Integer parentIndex;
 }
