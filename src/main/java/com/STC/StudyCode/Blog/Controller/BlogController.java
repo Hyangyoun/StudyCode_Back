@@ -8,6 +8,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/blog")
 public class BlogController {
@@ -34,5 +36,10 @@ public class BlogController {
     @Operation(summary = "블로그의 설정정보를 저장합니다.")
     public void SaveConfig(@RequestBody BlogDto blogDto) {
         blogService.SaveConfig(blogDto);
+    }
+
+    @GetMapping("/tag")
+    public List<String> TagList(@RequestParam Long blogIndex) {
+        return blogService.TagList(blogIndex);
     }
 }

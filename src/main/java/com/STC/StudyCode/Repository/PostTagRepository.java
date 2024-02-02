@@ -10,4 +10,8 @@ import java.util.List;
 public interface PostTagRepository extends JpaRepository<PostTagEntity, Long> {
     @Query("select t.tagName from PostTagEntity t join PostToPostTagEntity ts on ts.tag.tagIndex = t.tagIndex where ts.post.postIndex = :postIndex")
     List<String> PostInfoTag(@Param("postIndex") Long postIndex);
+
+    @Query("select distinct t.tagName from PostTagEntity t join PostToPostTagEntity pt on pt.tag.tagIndex = t.tagIndex " +
+            "where pt.blogIndex = :blogIndex")
+    List<String> BlogTagList(@Param("blogIndex") Long blogIndex);
 }

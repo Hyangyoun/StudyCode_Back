@@ -7,6 +7,7 @@ import com.STC.StudyCode.Blog.Dto.ConfigInfoDto;
 import com.STC.StudyCode.Entity.BlogCategoryEntity;
 import com.STC.StudyCode.Repository.BlogCategoryRepository;
 import com.STC.StudyCode.Repository.BlogRepository;
+import com.STC.StudyCode.Repository.PostTagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +19,14 @@ public class BlogServiceImpl implements BlogService{
 
     BlogRepository blogRepository;
     BlogCategoryRepository blogCategoryRepository;
+    PostTagRepository postTagRepository;
 
     @Autowired
-    public BlogServiceImpl(BlogRepository blogRepository, BlogCategoryRepository blogCategoryRepository) {
+    public BlogServiceImpl(BlogRepository blogRepository, BlogCategoryRepository blogCategoryRepository,
+                           PostTagRepository postTagRepository) {
         this.blogRepository = blogRepository;
         this.blogCategoryRepository = blogCategoryRepository;
+        this.postTagRepository = postTagRepository;
     }
 
     /** 블로그 기본정보 요청 */
@@ -53,5 +57,15 @@ public class BlogServiceImpl implements BlogService{
     @Override
     public void SaveConfig(BlogDto blogDto) {
         blogRepository.UpdateConfig(blogDto.getBlogIndex(), blogDto.getName(), blogDto.getSkin(), blogDto.getOverview());
+    }
+
+    @Override
+    public List<String> TagList(Long blogIndex) {
+        List<String> tagList = postTagRepository.BlogTagList(blogIndex);
+
+        if(tagList != null) {
+            return tagList;
+        }
+        else return null;
     }
 }
