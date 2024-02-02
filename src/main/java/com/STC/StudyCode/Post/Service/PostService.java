@@ -1,12 +1,13 @@
 package com.STC.StudyCode.Post.Service;
 
-import com.STC.StudyCode.Entity.PostEntity;
-import com.STC.StudyCode.Post.Dto.PostToTagDto;
+import com.STC.StudyCode.Post.Dto.PostInfoDto;
+import com.STC.StudyCode.Post.Dto.PostToTagInfoDto;
 
 import java.util.List;
 
 public interface PostService {
-    List<PostToTagDto> PostInfo(Integer postIndex);
+    PostToTagInfoDto postInfo(Long postIndex);
 
-    PostEntity test(Long index);
+    List<PostToTagInfoDto> postList(Long blogIndex);
+    void test(Long postIndex);
 }

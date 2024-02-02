@@ -1,7 +1,7 @@
 package com.STC.StudyCode.Post.Controller;
 
-import com.STC.StudyCode.Entity.PostEntity;
-import com.STC.StudyCode.Post.Dto.PostToTagDto;
+import com.STC.StudyCode.Post.Dto.PostInfoDto;
+import com.STC.StudyCode.Post.Dto.PostToTagInfoDto;
 import com.STC.StudyCode.Post.Service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,13 +21,18 @@ public class PostController {
         this.postService = postService;
     }
 
-    @GetMapping("/info")
-    public List<PostToTagDto> PostInfo(@RequestParam Integer postIndex) {
-        return postService.PostInfo(postIndex);
+    @GetMapping("/postInfo")
+    public PostToTagInfoDto postInfo(@RequestParam Long postIndex) {
+        return postService.postInfo(postIndex);
+    }
+
+    @GetMapping("/postList")
+    public List<PostToTagInfoDto> postList(@RequestParam Long blogIndex) {
+        return postService.postList(blogIndex);
     }
 
     @GetMapping("/test")
-    public PostEntity test(@RequestParam Long index) {
-        return postService.test(index);
+    public void test(@RequestParam Long index) {
+
     }
 }

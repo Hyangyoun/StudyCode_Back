@@ -1,5 +1,6 @@
 package com.STC.StudyCode.Repository;
 
+import com.STC.StudyCode.Category.Dto.CategoryInfoDto;
 import com.STC.StudyCode.Entity.BlogCategoryEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -11,6 +12,10 @@ import java.util.List;
 
 public interface BlogCategoryRepository extends JpaRepository<BlogCategoryEntity, Integer> {
     List<BlogCategoryEntity> findByBlogIndex(Integer blogIndex);
+
+    @Query("select c.categoryIndex as categoryIndex, c.categoryName as categoryName from BlogCategoryEntity c " +
+            "where c.blogIndex = :blogIndex")
+    List<CategoryInfoDto> CategoryInfo(@Param("blogIndex") Long blogIndex);
 
     @Modifying
     @Transactional

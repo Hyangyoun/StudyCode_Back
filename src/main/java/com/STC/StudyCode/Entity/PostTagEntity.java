@@ -16,7 +16,7 @@ import lombok.*;
 public class PostTagEntity {
     @Id
     @Column(name = "tag_index")
-    private Integer tagIndex;
+    private Long tagIndex;
     @Column(name = "tag_name")
     private String tagName;
 }

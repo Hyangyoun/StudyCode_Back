@@ -18,7 +18,7 @@ public class PostEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_index")
-    private Integer postIndex;
+    private Long postIndex;
     @Column(name = "blog_index")
     private Integer blogIndex;
     @Column(name = "category_index")
@@ -28,6 +28,8 @@ public class PostEntity {
     private Integer recommend;
     @Column(name = "post_date")
     private String postDate;
-    @OneToMany(mappedBy = "post")
+    @Column(name = "thumbnail_path")
+    private String thumbnailPath;
+    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
     private List<PostToPostTagEntity> tags;
 }
