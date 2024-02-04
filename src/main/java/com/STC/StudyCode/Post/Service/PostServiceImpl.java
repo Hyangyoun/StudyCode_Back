@@ -26,8 +26,24 @@ public class PostServiceImpl implements PostService{
         this.postTagRepository = postTagRepository;
     }
 
+    private List<PostToTagInfoDto> TagInPost(List<PostInfoDto> postInfoDtos, List<PostToTagInfoDto> postToTagInfoDtos) {
+        for(PostInfoDto postInfoDto : postInfoDtos) {
+            List<String> tag = postTagRepository.PostInfoTag(postInfoDto.getPostIndex());
+            postToTagInfoDtos.add(PostToTagInfoDto.builder()
+                    .postIndex(postInfoDto.getPostIndex())
+                    .title(postInfoDto.getTitle())
+                    .content(postInfoDto.getContent())
+                    .recommend(postInfoDto.getRecommend())
+                    .postDate(postInfoDto.getPostDate())
+                    .thumbnailPath(postInfoDto.getThumbnailPath())
+                    .tag(tag)
+                    .build());
+        }
+        return postToTagInfoDtos;
+    }
+
     @Override
-    public PostToTagInfoDto postInfo(Long postIndex) {
+    public PostToTagInfoDto PostInfo(Long postIndex) {
         PostInfoDto postInfoDto = postRepository.PostInfo(postIndex);
 
         if(postInfoDto != null) {
@@ -47,23 +63,22 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
-    public List<PostToTagInfoDto> postList(Long blogIndex) {
+    public List<PostToTagInfoDto> PostList(Long blogIndex) {
         List<PostInfoDto> postInfoDtos = postRepository.PostList(blogIndex);
         List<PostToTagInfoDto> postList = new ArrayList<PostToTagInfoDto>();
         if(postInfoDtos != null) {
-            for(PostInfoDto postInfoDto : postInfoDtos) {
-                List<String> tag = postTagRepository.PostInfoTag(postInfoDto.getPostIndex());
-                postList.add(PostToTagInfoDto.builder()
-                        .postIndex(postInfoDto.getPostIndex())
-                        .title(postInfoDto.getTitle())
-                        .content(postInfoDto.getContent())
-                        .recommend(postInfoDto.getRecommend())
-                        .postDate(postInfoDto.getPostDate())
-                        .thumbnailPath(postInfoDto.getThumbnailPath())
-                        .tag(tag)
-                        .build());
-            }
-            return postList;
+            return TagInPost(postInfoDtos, postList);
+        }
+        else return null;
+    }
+
+    @Override
+    public List<PostToTagInfoDto> TagToPostList(Long blogIndex, String tagName) {
+        List<PostInfoDto> postInfoDtos = postToPostTagRepository.TagToPostList(blogIndex, tagName);
+        List<PostToTagInfoDto> postToTagInfoDtos = new ArrayList<PostToTagInfoDto>();
+
+        if(postInfoDtos != null) {
+            return TagInPost(postInfoDtos, postToTagInfoDtos);
         }
         else return null;
     }

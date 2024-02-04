@@ -23,12 +23,17 @@ public class PostController {
 
     @GetMapping("/postInfo")
     public PostToTagInfoDto postInfo(@RequestParam Long postIndex) {
-        return postService.postInfo(postIndex);
+        return postService.PostInfo(postIndex);
     }
 
     @GetMapping("/postList")
     public List<PostToTagInfoDto> postList(@RequestParam Long blogIndex) {
-        return postService.postList(blogIndex);
+        return postService.PostList(blogIndex);
+    }
+
+    @GetMapping("/tagToList")
+    public List<PostToTagInfoDto> postList(@RequestParam Long blogIndex, @RequestParam String tagName) {
+        return postService.TagToPostList(blogIndex, tagName);
     }
 
     @GetMapping("/test")

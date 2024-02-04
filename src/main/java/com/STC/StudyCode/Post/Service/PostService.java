@@ -6,8 +6,9 @@ import com.STC.StudyCode.Post.Dto.PostToTagInfoDto;
 import java.util.List;
 
 public interface PostService {
-    PostToTagInfoDto postInfo(Long postIndex);
+    PostToTagInfoDto PostInfo(Long postIndex);
 
-    List<PostToTagInfoDto> postList(Long blogIndex);
+    List<PostToTagInfoDto> PostList(Long blogIndex);
     void test(Long postIndex);
+    List<PostToTagInfoDto> TagToPostList(Long blogIndex, String tagName);
 }
