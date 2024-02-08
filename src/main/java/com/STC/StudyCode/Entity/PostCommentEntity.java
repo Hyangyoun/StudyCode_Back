@@ -18,12 +18,12 @@ public class PostCommentEntity {
     @Column(name = "comment_index")
     private Integer commentIndex;
     @Column(name = "post_index")
-    private Integer postIndex;
+    private Long postIndex;
     @Column(name = "mem_id")
     private String memId;
     private String content;
     @Column(name = "comment_date")
     private String commentDate;
     @Column(name = "parent_index")
-    private Integer parentIndex;
+    private Long parentIndex;
 }

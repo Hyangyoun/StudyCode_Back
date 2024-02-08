@@ -33,12 +33,18 @@ public class CategoryServiceImpl implements CategoryService{
     }
 
     @Override
+    public List<CategoryInfoDto> CategoryList(Long blogIndex) {
+        return blogCategoryRepository.CategoryInfo(blogIndex);
+    }
+
+    @Override
     public List<CategoryInfoListDto> CategoryInfo(Long blogIndex) {
         List<CategoryInfoDto> categoryInfos = blogCategoryRepository.CategoryInfo(blogIndex);
         List<CategoryInfoListDto> categoryInfoListDtos = new ArrayList<CategoryInfoListDto>();
 
         for(CategoryInfoDto categoryInfoDto : categoryInfos) {
             categoryInfoListDtos.add(CategoryInfoListDto.builder()
+                    .categoryIndex(categoryInfoDto.getCategoryIndex())
                     .categoryName(categoryInfoDto.getCategoryName())
                     .postCount(postRepository.countByCategoryIndex(categoryInfoDto.getCategoryIndex()))
                     .thumbnailPath(postRepository.categoryThumbnail(categoryInfoDto.getCategoryIndex()))

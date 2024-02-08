@@ -18,13 +18,11 @@ public class PostToPostTagEntity {
     @Column(name = "pt_index")
     private Long ptIndex;
 
-    @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "post_index")
-    private PostEntity post;
+    @Column(name = "post_index")
+    private Long postIndex;
 
-    @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "tag_index")
-    private PostTagEntity tag;
+    @Column(name = "tag_index")
+    private Long tagIndex;
 
     @Column(name = "blog_index")
     private Long blogIndex;

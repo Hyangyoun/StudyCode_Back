@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class BlogDto {
-    private Integer blogIndex;
+    private Long blogIndex;
     private String memId;
     private String name;
     private Integer skin;

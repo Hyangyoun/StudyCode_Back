@@ -14,18 +14,19 @@ import lombok.NoArgsConstructor;
 @Table(name = "Repository")
 public class RepositoryEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "file_index")
     private Integer fileIndex;
     @Column(name = "parent_index")
     private Integer parentIndex;
     @Column(name = "blog_index")
-    private Integer blogIndex;
+    private Long blogIndex;
     @Column(name = "post_index")
-    private Integer postIndex;
+    private Long postIndex;
     @Column(name = "file_name")
-    private Integer fileName;
+    private String fileName;
     @Column(name = "file_path")
-    private Integer filePath;
+    private String filePath;
     @Enumerated(EnumType.STRING)
     private RepositoryType type;
 }

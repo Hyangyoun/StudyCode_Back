@@ -30,6 +30,4 @@ public class PostEntity {
     private String postDate;
     @Column(name = "thumbnail_path")
     private String thumbnailPath;
-    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
-    private List<PostToPostTagEntity> tags;
 }

@@ -14,5 +14,7 @@ public class PostToTagInfoDto {
     private Integer recommend;
     private String postDate;
     private String thumbnailPath;
+    private String nickname;
+    private String blogName;
     private List<String> tag;
 }

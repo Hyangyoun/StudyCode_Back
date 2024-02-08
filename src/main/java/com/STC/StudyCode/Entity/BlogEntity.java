@@ -16,7 +16,7 @@ public class BlogEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "blog_index")
-    private Integer blogIndex;
+    private Long blogIndex;
     @Column(name = "mem_id")
     private String memId;
     private String name;

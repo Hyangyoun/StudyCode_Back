@@ -1,9 +1,6 @@
 package com.STC.StudyCode.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -15,6 +12,7 @@ import lombok.*;
 @Table(name = "PostTag")
 public class PostTagEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tag_index")
     private Long tagIndex;
     @Column(name = "tag_name")
